@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. ./bsfl
+. ../src/bsfl.sh
 
 LOG_ENABLED=y
 LOG_FILE=my-log-file.log

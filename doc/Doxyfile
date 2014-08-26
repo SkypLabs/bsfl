@@ -1,0 +1,8 @@
+DOXYFILE_ENCODING		= UTF-8
+PROJECT_NAME			= bsfl
+
+INPUT					= ../src
+INPUT_ENCODING			= UTF-8
+FILE_PATTERNS			= *.sh
+INPUT_FILTER			= "sed -n -f ./doxygen-bash.sed --"
+FILTER_SOURCE_FILES		= YES
