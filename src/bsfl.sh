@@ -14,6 +14,12 @@
 # and override the variables to change their value.
 #
 
+## @par Purpose
+## The Bash Shell Function Library (BSFL) is a small Bash script that acts as a library
+## for bash scripts. It provides a couple of functions that makes the lives of most
+## people using shell scripts a bit easier.
+
+
 # Variables
 # --------------------------------------------------------------#
 
@@ -22,9 +28,9 @@
 declare -r BSFL_VERSION="0.1.0"
 
 ## @var DEBUG
-## @brief Enables debug mode.
+## @brief Enables / disables debug mode.
 ## @details Debug mode shows more verbose output to screen and log files.
-## @details Value: yes or no (y / n).
+## Value: yes or no (y / n).
 declare DEBUG="no"
 
 ## @var LOGDATEFORMAT
@@ -145,7 +151,7 @@ set +o histexpand
 # --------------------------------------------------------------#
 
 ## @fn defined()
-## @brief Test if the variable given as parameter is defined.
+## @brief Tests if a variable is defined.
 ## @param variable Variable to test.
 ## @retval 0 if the variable is defined.
 ## @retval 1 in others cases.
@@ -154,6 +160,7 @@ defined() {
 }
 
 ## @fn has_value()
+## @brief Tests if a variable has a value.
 ## @param variable Variable to operate on.
 ## @retval 0 if the variable is defined (set) and value's length > 0.
 ## @retval 1 in others cases.
@@ -167,6 +174,7 @@ has_value() {
 }
 
 ## @fn directory_exists()
+## @brief Tests if a directory exists.
 ## @param directory Directory to operate on.
 ## @retval 0 if a directory exists.
 ## @retval 1 in others cases.
@@ -178,6 +186,7 @@ directory_exists() {
 }
 
 ## @fn file_exists()
+## @brief Tests if a file exists.
 ## @param file File to operate on.
 ## @retval 0 if a (regular) file exists.
 ## @retval 1 in others cases.
@@ -238,19 +247,18 @@ option_enabled() {
 }
 
 ## @fn log2syslog()
-## @brief The log funcion just puts a string into a file,
-## prepended with a date & time in syslog format.
+## @brief Logs a message with syslog.
 ## @param message Message that has to be logged.
 log2syslog() {
 	if option_enabled  SYSLOG_ENABLED
 	then
 		MESSAGE="$1"
-		logger -t "$SYSLOG_TAG" " $MESSAGE" #The space is not a typo!
+		logger -t "$SYSLOG_TAG" " $MESSAGE" # The space is not a typo!
 	fi
 }
 
 ## @fn log()
-## @brief This function writes messages to a log file and/or syslog.
+## @brief Writes messages to a log file and/or syslog.
 ## @param message Message that has to be logged.
 ## @param status Message's status.
 log() {
@@ -274,17 +282,16 @@ log() {
 		
 		if option_enabled SYSLOG_ENABLED
 		then
-			#
 			# Syslog already prepends a date/time stamp so only the message
 			# is logged.
-			#
 			log2syslog "$LOG_MESSAGE"
 		fi
 	fi
 }
 
 ## @fn msg()
-## @brief This function basically replaces the 'echo' function in bash scripts.
+## @brief Replaces the 'echo' function in bash scripts.
+## @details This function basically replaces the 'echo' function in bash scripts.
 ## The added functionality over echo is logging and using colors.
 ## @param string String / message that must be displayed.
 ## @param color Text color.
@@ -318,7 +325,8 @@ msg() {
 }
 
 ## @fn log_status()
-## @brief The log message is formatted with the status preceding the message.
+## @brief Logs a message with status.
+## @details The log message is formatted with the status preceding the message.
 ## @param message Message that has to be logged.
 ## @param status Message's status.
 log_status() {
@@ -332,6 +340,8 @@ log_status() {
 }
 
 ## @fn log_emergency()
+## @brief Logs a message with 'emergency' status.
+## @param message Message that has to be logged.
 log_emergency() {
 	MESSAGE="$1"
 	STATUS="EMERGENCY"
@@ -339,6 +349,8 @@ log_emergency() {
 }
 
 ## @fn log_alert()
+## @brief Logs a message with 'alert' status.
+## @param message Message that has to be logged.
 log_alert() {
 	MESSAGE="$1"
 	STATUS="ALERT"
@@ -346,6 +358,8 @@ log_alert() {
 }
 
 ## @fn log_critical()
+## @brief Logs a message with 'critical' status.
+## @param message Message that has to be logged.
 log_critical() {
 	MESSAGE="$1"
 	STATUS="CRITICAL"
@@ -353,6 +367,8 @@ log_critical() {
 }
 
 ## @fn log_error()
+## @brief Logs a message with 'error' status.
+## @param message Message that has to be logged.
 log_error() {
 	MESSAGE="$1"
 	STATUS="ERROR"
@@ -360,6 +376,8 @@ log_error() {
 }
 
 ## @fn log_warning()
+## @brief Logs a message with 'warning' status.
+## @param message Message that has to be logged.
 log_warning() {
 	MESSAGE="$1"
 	STATUS="WARNING"
@@ -367,6 +385,8 @@ log_warning() {
 }
 
 ## @fn log_notice()
+## @brief Logs a message with 'notice' status.
+## @param message Message that has to be logged.
 log_notice() {
 	MESSAGE="$1"
 	STATUS="NOTICE"
@@ -374,6 +394,8 @@ log_notice() {
 }
 
 ## @fn log_info()
+## @brief Logs a message with 'info' status.
+## @param message Message that has to be logged.
 log_info() {
 	MESSAGE="$1"
 	STATUS="INFO"
@@ -381,6 +403,8 @@ log_info() {
 }
 
 ## @fn log_debug()
+## @brief Logs a message with 'debug' status.
+## @param message Message that has to be logged.
 log_debug() {
 	MESSAGE="$1"
 	STATUS="DEBUG"
@@ -388,6 +412,8 @@ log_debug() {
 }
 
 ## @fn log_ok()
+## @brief Logs a message with 'ok' status.
+## @param message Message that has to be logged.
 log_ok() {
 	MESSAGE="$1"
 	STATUS="OK"
@@ -395,6 +421,8 @@ log_ok() {
 }
 
 ## @fn log_not_ok()
+## @brief Logs a message with 'not ok' status.
+## @param message Message that has to be logged.
 log_not_ok() {
 	MESSAGE="$1"
 	STATUS="NOT_OK"
@@ -402,6 +430,8 @@ log_not_ok() {
 }
 
 ## @fn log_fail()
+## @brief Logs a message with 'failed' status.
+## @param message Message that has to be logged.
 log_fail() {
 	MESSAGE="$1"
 	STATUS="FAILED"
@@ -409,6 +439,8 @@ log_fail() {
 }
 
 ## @fn log_success()
+## @brief Logs a message with 'success' status.
+## @param message Message that has to be logged.
 log_success() {
 	MESSAGE="$1"
 	STATUS="SUCCESS"
@@ -416,6 +448,8 @@ log_success() {
 }
 
 ## @fn log_passed()
+## @brief Logs a message with 'passed' status.
+## @param message Message that has to be logged.
 log_passed() {
 	MESSAGE="$1"
 	STATUS="PASSED"
@@ -423,9 +457,8 @@ log_passed() {
 }
 
 ## @fn msg_status()
-## @brief This function echos a message and displays
-## the status at the end of the line.
-## It can be used to create status messages other
+## @brief Displays a message with his status at the end of the line.
+## @details It can be used to create status messages other
 ## than the default messages available such as OK or FAIL.
 ## @param message Message to display.
 ## @param status Message's status.
@@ -441,6 +474,8 @@ msg_status() {
 }
 
 ## @fn msg_emergency()
+## @brief Displays a message with 'emergency' status.
+## @param message Message that has to be displayed.
 msg_emergency() {
 	MESSAGE="$1"
 	STATUS="EMERGENCY"
@@ -448,6 +483,8 @@ msg_emergency() {
 }
 
 ## @fn msg_alert()
+## @brief Displays a message with 'alert' status.
+## @param message Message that has to be displayed.
 msg_alert() {
 	MESSAGE="$1"
 	STATUS="ALERT"
@@ -455,6 +492,8 @@ msg_alert() {
 }
 
 ## @fn msg_critical()
+## @brief Displays a message with 'critical' status.
+## @param message Message that has to be displayed.
 msg_critical() {
 	MESSAGE="$1"
 	STATUS="CRITICAL"
@@ -462,6 +501,8 @@ msg_critical() {
 }
 
 ## @fn msg_error()
+## @brief Displays a message with 'error' status.
+## @param message Message that has to be displayed.
 msg_error() {
 	MESSAGE="$1"
 	STATUS="ERROR"
@@ -469,6 +510,8 @@ msg_error() {
 }
 
 ## @fn msg_warning()
+## @brief Displays a message with 'warning' status.
+## @param message Message that has to be displayed.
 msg_warning() {
 	MESSAGE="$1"
 	STATUS="WARNING"
@@ -476,6 +519,8 @@ msg_warning() {
 }
 
 ## @fn msg_notice()
+## @brief Displays a message with 'notice' status.
+## @param message Message that has to be displayed.
 msg_notice() {
 	MESSAGE="$1"
 	STATUS="NOTICE"
@@ -483,6 +528,8 @@ msg_notice() {
 }
 
 ## @fn msg_info()
+## @brief Displays a message with 'info' status.
+## @param message Message that has to be displayed.
 msg_info() {
 	MESSAGE="$1"
 	STATUS="INFO"
@@ -490,6 +537,8 @@ msg_info() {
 }
 
 ## @fn msg_debug()
+## @brief Displays a message with 'debug' status.
+## @param message Message that has to be displayed.
 msg_debug() {
 	MESSAGE="$1"
 	STATUS="DEBUG"
@@ -497,6 +546,8 @@ msg_debug() {
 }
 
 ## @fn msg_ok()
+## @brief Displays a message with 'ok' status.
+## @param message Message that has to be displayed.
 msg_ok() {
 	MESSAGE="$1"
 	STATUS="OK"
@@ -504,6 +555,8 @@ msg_ok() {
 }
 
 ## @fn msg_not_ok()
+## @brief Displays a message with 'not ok' status.
+## @param message Message that has to be displayed.
 msg_not_ok() {
 	MESSAGE="$1"
 	STATUS="NOT_OK"
@@ -511,6 +564,8 @@ msg_not_ok() {
 }
 
 ## @fn msg_fail()
+## @brief Displays a message with 'failed' status.
+## @param message Message that has to be displayed.
 msg_fail() {
 	MESSAGE="$1"
 	STATUS="FAILED"
@@ -518,6 +573,8 @@ msg_fail() {
 }
 
 ## @fn msg_success()
+## @brief Displays a message with 'success' status.
+## @param message Message that has to be displayed.
 msg_success() {
 	MESSAGE="$1"
 	STATUS="SUCCESS"
@@ -525,6 +582,8 @@ msg_success() {
 }
 
 ## @fn msg_passed()
+## @brief Displays a message with 'passed' status.
+## @param message Message that has to be displayed.
 msg_passed() {
 	MESSAGE="$1"
 	STATUS="PASSED"
@@ -532,6 +591,7 @@ msg_passed() {
 }
 
 ## @fn check_status()
+## @brief Checks the command's status and displays it.
 ## @param command
 ## @param status
 check_status() {
@@ -577,7 +637,7 @@ raw_status() {
 }
 
 ## @fn display_status()
-## @brief This function converts a status message to a particular color.
+## @brief Converts a status message to a particular color.
 ## @param status Status message.
 display_status() {
 	STATUS="$1"
@@ -658,8 +718,7 @@ bail() {
 }
 
 ## @fn cmd()
-## @brief This function executes a command provided as a parameter
-## The function then displays if the command succeeded or not.
+## @brief Executes a command and displays if it succeeded or not.
 ## @param command Command to execute.
 ## @return Error status.
 cmd() {
@@ -689,14 +748,15 @@ cmd() {
 }
 
 ## @fn now()
-## @brief These functions can be used for timing how long (a) command(s)
-## take to execute.
+## @brief Displays current timestamp.
 now() {
 	echo $(date +%s)
 }
 
 ## @fn elapsed()
 ## @brief Displays the time elapsed between start and stop parameters.
+## @param start Start timestamp.
+## @param stop Stop timestamp.
 elapsed() {
 	START="$1"
 	STOP="$2"
@@ -712,7 +772,7 @@ start_watch() {
 }
 
 ## @fn stop_watch()
-## @brief Stops the watch.
+## @brief Stops the watch and displays the time elapsed.
 stop_watch() {
 	if has_value START_WATCH
 	then
@@ -741,7 +801,9 @@ die() {
 } >&2 # function writes to stderr
 
 ## @fn die_if_false()
-## @brief Check if a return code indicates an error
+## @brief If error code is not '0', displays an error
+## message and exits.
+## @details Checks if a return code indicates an error
 ## and prints an error message to stderr and exits with
 ## the return code. The error is also logged.
 ## Die if error code is false.
@@ -760,7 +822,12 @@ die_if_false() {
 } >&2 # function writes to stderr
 
 ## @fn die_if_true()
-## @brief Dies when error code is true.
+## @brief If error code is '0', displays an error
+## message and exits.
+## @details Checks if a return code is '0' and prints
+## an error message to stderr and exits with the
+## return code. The error is also logged.
+## Die if error code is false.
 ## @param errcode Error code.
 ## @param errmsg Error message.
 ## @return Error code given as parameter.
@@ -818,8 +885,7 @@ __bsfl_array_len() {
 
 ## @fn array_append()
 ## @brief Appends one or more items to an array.
-## First parameter is array's name.
-## @param array Array to use.
+## @param array Array to operate on.
 array_append() {
 	local array=$1; shift 1
 	
@@ -838,7 +904,7 @@ array_append() {
 
 ## @fn array_size()
 ## @brief Returns the size of an array.
-## @param array Array to use.
+## @param array Array to operate on.
 array_size() {
 	$(__bsfl_array_len size $1)
 	echo "$size"
@@ -846,7 +912,7 @@ array_size() {
 
 ## @fn array_print()
 ## @brief Prints the contents of an array.
-## @param array Array to use.
+## @param array Array to operate on.
 array_print() {
 	eval "printf '%s\n' \"\${$1[@]}\""
 }
