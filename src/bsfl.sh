@@ -735,7 +735,7 @@ cmd() {
 	if [ "$ERROR" == "0" ]
 	then
 		msg_ok "$MSG"
-		if [ "$DEBUG" == "1" ]
+		if option_enabled DEBUG
 		then
 			msg "$RESULT"
 		fi

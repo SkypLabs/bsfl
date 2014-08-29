@@ -16,5 +16,5 @@ echo
 
 msg "As you can see, the command's result is not displayed. If you want to, you have to enable the debug mode using 'DEBUG' variable :" "$BOLD"
 
-DEBUG=1
+DEBUG=y
 cmd "ls -al"

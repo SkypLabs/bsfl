@@ -13,7 +13,7 @@ echo
 
 msg "Thus, this message is logged in a file as you can see :." "$BOLD"
 
-DEBUG=1
+DEBUG=y
 cmd "cat $LOG_FILE"
 echo
 
