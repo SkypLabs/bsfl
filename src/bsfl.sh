@@ -429,10 +429,10 @@ log_not_ok() {
 	log_status "$MESSAGE" "$STATUS"
 }
 
-## @fn log_fail()
+## @fn log_failed()
 ## @brief Logs a message with 'failed' status.
 ## @param message Message that has to be logged.
-log_fail() {
+log_failed() {
 	MESSAGE="$1"
 	STATUS="FAILED"
 	log_status "$MESSAGE" "$STATUS"
@@ -563,10 +563,10 @@ msg_not_ok() {
 	msg_status "$MESSAGE" "$STATUS"
 }
 
-## @fn msg_fail()
+## @fn msg_failed()
 ## @brief Displays a message with 'failed' status.
 ## @param message Message that has to be displayed.
-msg_fail() {
+msg_failed() {
 	MESSAGE="$1"
 	STATUS="FAILED"
 	msg_status "$MESSAGE" "$STATUS"
@@ -602,7 +602,7 @@ check_status() {
 	then
 		msg_ok "$CMD"
 	else
-		msg_fail "$CMD"
+		msg_failed "$CMD"
 	fi
 }
 
@@ -712,7 +712,7 @@ bail() {
 	MSG="$1"
 	if [ ! "$ERROR" = "0" ]
 	then
-		msg_fail "$MSG"
+		msg_failed "$MSG"
 		exit "$ERROR"
 	fi
 }
@@ -740,7 +740,7 @@ cmd() {
 			msg "$RESULT"
 		fi
 	else
-		msg_fail "$MSG"
+		msg_failed "$MSG"
 		log "$RESULT"
 	fi
 	
@@ -794,9 +794,9 @@ die() {
 	local -r err_msg="$2"
 	local -r err_caller="${3:-$(caller 0)}"
 	
-	msg_fail "ERROR: $err_msg"
-	msg_fail "ERROR: At line $err_caller"
-	msg_fail "ERROR: Error code = $err_code"
+	msg_failed "ERROR: $err_msg"
+	msg_failed "ERROR: At line $err_caller"
+	msg_failed "ERROR: Error code = $err_code"
 	exit "$err_code"
 } >&2 # function writes to stderr
 

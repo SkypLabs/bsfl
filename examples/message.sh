@@ -44,7 +44,7 @@ echo
 
 # --------------------
 
-msg_fail "This is a displayed message with its status using 'msg_fail' function."
+msg_failed "This is a displayed message with its status using 'msg_failed' function."
 echo
 
 # --------------------

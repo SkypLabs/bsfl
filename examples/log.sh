@@ -51,7 +51,7 @@ log_error "This is a logged message using 'log_error' function."
 
 # --------------------
 
-log_fail "This is a logged message using 'log_fail' function."
+log_failed "This is a logged message using 'log_failed' function."
 
 # --------------------
 
