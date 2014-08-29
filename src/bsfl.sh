@@ -39,7 +39,7 @@ declare LOGDATEFORMAT="%b %e %H:%M:%S"
 
 ## @var LOG_FILE
 ## @brief Sets the log file to use when log are enabled.
-declare LOG_FILE="bsfl.log"
+declare LOG_FILE="$0.log"
 
 ## @var LOG_ENABLED
 ## @brief Enables / disables logging to a file.
@@ -457,7 +457,7 @@ log_passed() {
 }
 
 ## @fn msg_status()
-## @brief Displays a message with his status at the end of the line.
+## @brief Displays a message with its status at the end of the line.
 ## @details It can be used to create status messages other
 ## than the default messages available such as OK or FAIL.
 ## @param message Message to display.
@@ -885,6 +885,7 @@ __bsfl_array_len() {
 
 ## @fn array_append()
 ## @brief Appends one or more items to an array.
+## @details If the array does not exist, this function will create it.
 ## @param array Array to operate on.
 array_append() {
 	local array=$1; shift 1
@@ -960,7 +961,7 @@ stack_push() {
 }
 
 ## @fn stack_pop()
-## @brief Moves the lowest item of the stack in REGISTER variable
+## @brief Moves the highest item of the stack in REGISTER variable
 ## and deletes it from the stack.
 ## @retval 0 if succeed.
 ## @retval 1 in others cases.
@@ -974,7 +975,7 @@ stack_pop() {
 		then
 			tmp="$x"
 		else
-			stack_push_tmp "$x"
+			__stack_push_tmp "$x"
 		fi
 		((i++))
 	done
