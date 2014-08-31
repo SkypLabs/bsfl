@@ -16,9 +16,10 @@ echo
 
 # --------------------
 
-msg "We stop the watch using 'stop_watch' function." "$BOLD"
+msg "We stop the watch using 'stop_watch' function which returns the time elapsed." "$BOLD"
 
-stop_watch
+time_elapsed=$(stop_watch)
+msg "Time elapsed : $time_elapsed"
 echo
 
 # --------------------
@@ -30,7 +31,7 @@ echo
 
 # --------------------
 
-cmd "sleep 3"
+cmd "sleep 2"
 echo
 
 # --------------------
@@ -42,6 +43,7 @@ echo
 
 # --------------------
 
-msg "And now, we use the 'elapsed' function with our two variables as parameters to display the elapsed time :" "$BOLD"
+msg "And now, we use the 'elapsed' function with our two variables as parameters to get the elapsed time :" "$BOLD"
 
-elapsed $START $STOP
+time_elapsed=$(elapsed $START $STOP)
+msg "Time elapsed : $time_elapsed"

@@ -222,7 +222,7 @@ trim() {
 ## @brief Dummy function to provide usage instructions.
 ## Override this function if required.
 ## @param message Message to display.
-## @return Returns 1.
+## @retval 1 in all cases.
 show_usage() {
 	MESSAGE="$1"
 	echo "$MESSAGE"
@@ -762,7 +762,7 @@ elapsed() {
 	STOP="$2"
 	
 	ELAPSED=$(( STOP - START ))
-	msg "Seconds elapsed: $ELAPSED"
+	echo $ELAPSED
 }
 
 ## @fn start_watch()
@@ -773,13 +773,16 @@ start_watch() {
 
 ## @fn stop_watch()
 ## @brief Stops the watch and displays the time elapsed.
+## @retval 0 if succeed.
+## @retval 1 if the watch has not been started.
 stop_watch() {
 	if has_value START_WATCH
 	then
 		STOP_WATCH=`now`
 		elapsed "$START_WATCH" "$STOP_WATCH"
+		return 0
 	else
-		msg "Start time not set... (start_watch)"
+		return 1
 	fi
 }
 
@@ -994,7 +997,7 @@ stack_pop() {
 ## @param origin String to be matched.
 ## @param destination New string that replaces matched string.
 ## @param file File to operate on.
-## @return 0 if succeed.
+## @retval 0 if succeed.
 str_replace_in_file() {
 	local ORIG="$1"
 	local DEST="$2"
