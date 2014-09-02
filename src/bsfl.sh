@@ -56,89 +56,75 @@ declare SYSLOG_ENABLED="no"
 ## @details Value: yes or no (y / n).
 declare SYSLOG_TAG="$0"
 
-## @var START_WATCH
+## @var __START_WATCH
 ## @brief Internal use.
 ## @private
-declare START_WATCH=""
+declare __START_WATCH=""
 
-## @var STACK
+## @var __STACK
 ## @brief Internal use.
 ## @private
-declare STACK
+declare __STACK
 
-## @var TMP_STACK
+## @var __TMP_STACK
 ## @brief Internal use.
 ## @private
-declare TMP_STACK
+declare __TMP_STACK
 
 ## @var RED
-## @brief Internal use.
-## @private
+## @brief Internal color.
 declare -r RED="tput setaf 1"
 
 ## @var GREEN
-## @brief Internal use.
-## @private
+## @brief Internal color.
 declare -r GREEN="tput setaf 2"
 
 ## @var YELLOW
-## @brief Internal use.
-## @private
+## @brief Internal color.
 declare -r YELLOW="tput setaf 3"
 
 ## @var BLUE
-## @brief Internal use.
-## @private
+## @brief Internal color.
 declare -r BLUE="tput setaf 4"
 
 ## @var MAGENTA
-## @brief Internal use.
-## @private
+## @brief Internal color.
 declare -r MAGENTA="tput setaf 5"
 
 ## @var CYAN
-## @brief Internal use.
-## @private
+## @brief Internal color.
 declare -r CYAN="tput setaf 6"
 
 ## @var BOLD
-## @brief Internal use.
-## @private
+## @brief Internal color.
 declare -r BOLD="tput bold"
 
 ## @var DEFAULT
-## @brief Internal use.
-## @private
+## @brief Internal color.
 declare -r DEFAULT="tput sgr0"
 
 ## @var RED_BG
-## @brief Internal use.
-## @private
+## @brief Internal color.
 declare -r RED_BG="tput setab 1"
 
 ## @var GREEN_BG
-## @brief Internal use.
-## @private
+## @brief Internal color.
 declare -r GREEN_BG="tput setab 2"
 
 ## @var YELLOW_BG
-## @brief Internal use.
-## @private
+## @brief Internal color.
 declare -r YELLOW_BG="tput setab 3"
 
 ## @var BLUE_BG
-## @brief Internal use.
-## @private
+## @brief Internal color.
 declare -r BLUE_BG="tput setab 4"
 
 ## @var MAGENTA_BG
-## @brief Internal use.
-## @private
+## @brief Internal color.
 declare -r MAGENTA_BG="tput setab 5"
 
 ## @var CYAN_BG
-## @brief Internal use.
-## @private
+## @brief Internal color.
 declare -r CYAN_BG="tput setab 6"
 
 # Configuration
@@ -606,7 +592,7 @@ check_status() {
 	fi
 }
 
-## @fn raw_status()
+## @fn __raw_status()
 ## @brief Internal use.
 ## @private
 ## @details This is a function that just positions
@@ -616,7 +602,7 @@ check_status() {
 ## right side of the screen.
 ## @param status Status message (OK / FAIL).
 ## @param color The color in which the status is displayed.
-raw_status() {
+__raw_status() {
 	STATUS="$1"
 	COLOR="$2"
 	
@@ -700,7 +686,7 @@ display_status() {
 			COLOR="$YELLOW"
 	esac
 	
-	raw_status "$STATUS" "$COLOR"
+	__raw_status "$STATUS" "$COLOR"
 }
 
 ## @fn bail()
@@ -768,7 +754,7 @@ elapsed() {
 ## @fn start_watch()
 ## @brief Starts the watch.
 start_watch() {
-	START_WATCH=`now`
+	__START_WATCH=`now`
 }
 
 ## @fn stop_watch()
@@ -776,10 +762,10 @@ start_watch() {
 ## @retval 0 if succeed.
 ## @retval 1 if the watch has not been started.
 stop_watch() {
-	if has_value START_WATCH
+	if has_value __START_WATCH
 	then
 		STOP_WATCH=`now`
-		elapsed "$START_WATCH" "$STOP_WATCH"
+		elapsed "$__START_WATCH" "$STOP_WATCH"
 		return 0
 	else
 		return 1
@@ -941,11 +927,11 @@ str_replace() {
 __stack_push_tmp() {
 	local TMP="$1"
 	
-	if has_value TMP_STACK
+	if has_value __TMP_STACK
 	then
-		TMP_STACK="$TMP"
+		__TMP_STACK="$TMP"
 	else
-		TMP_STACK="$TMP_STACK"$'\n'"$TMP"
+		__TMP_STACK="$__TMP_STACK"$'\n'"$TMP"
 	fi
 }
 
@@ -955,11 +941,11 @@ __stack_push_tmp() {
 stack_push() {
 	line="$1"
 	
-	if has_value $STACK
+	if has_value $__STACK
 	then
-		STACK="$line"
+		__STACK="$line"
 	else
-		STACK="$line"$'\n'"$STACK"
+		__STACK="$line"$'\n'"$__STACK"
 	fi
 }
 
@@ -969,10 +955,10 @@ stack_push() {
 ## @retval 0 if succeed.
 ## @retval 1 in others cases.
 stack_pop() {
-	TMP_STACK=""
+	__TMP_STACK=""
 	i=0
 	tmp=""
-	for x in $STACK
+	for x in $__STACK
 	do
 		if [ "$i" == "0" ]
 		then
@@ -982,7 +968,7 @@ stack_pop() {
 		fi
 		((i++))
 	done
-	STACK="$TMP_STACK"
+	__STACK="$__TMP_STACK"
 	REGISTER="$tmp"
 	if [ -z "$REGISTER" ]
 	then
