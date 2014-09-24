@@ -298,8 +298,6 @@ msg() {
 		if ! option_enabled "DONOTLOG"
 		then
 			log "$MESSAGE"
-		else
-			echo "DONOTLOG is $DONOTLOG"
 		fi
 	else
 		echo "-- no message received --"
@@ -996,4 +994,43 @@ str_replace_in_file() {
 	
 	printf ",s/$ORIG/$DEST/g\nw\nQ" | ed -s "$FILE" > /dev/null 2>&1
 	return "$?"
+}
+
+## @fn is_ipv4()
+## @brief Used to test an IPv4.
+## @param address Address to test.
+## @retval 0 if the address is an IPv4.
+## @retval 1 in others cases.
+is_ipv4() {
+	echo $1 | grep -Eq '\b((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4}\b'
+	
+	return $?
+}
+
+## @fn is_fqdn()
+## @brief Used to test a FQDN address.
+## @param address Address to test.
+## @retval 0 if the address is a FQDN.
+## @retval 1 in others cases.
+is_fqdn() {
+	echo $1 | grep -Pq '(?=^.{4,255}$)(^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\.)+[a-zA-Z]{2,63}$)'
+	
+	return $?
+}
+
+## @fn is_ipv4_subnet()
+## @brief Used to test an IPv4 subnet.
+## @param address Address to test.
+## @retval 0 if the address is an IPv4 subnet.
+## @retval 1 in others cases.
+is_ipv4_subnet() {
+	tip=$(echo $1 | cut -d/ -f1)
+	tmask=$(echo $1 | cut -d/ -f2)
+	
+	echo $tmask | egrep "^[[:digit:]]{1,2}$" || return 1
+	[ "$tmask" -gt 32 ] || return 1
+	
+	echo $tip | grep -Eq '\b((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4}\b'
+	
+	return $?
 }
