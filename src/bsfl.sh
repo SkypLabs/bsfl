@@ -183,6 +183,18 @@ file_exists() {
 	return 1
 }
 
+## @fn device_exists()
+## @brief Tests if a device exists.
+## @param device Device file to operate on.
+## @retval 0 if a device exists.
+## @retval 1 in others cases.
+device_exists() {
+	if [[ -b "$1" ]]; then
+		return 0
+	fi
+	return 1
+}
+
 ## @fn tolower()
 ## @brief Returns lowercase string.
 ## @param string String to operate on.
@@ -1028,9 +1040,47 @@ is_ipv4_subnet() {
 	tmask=$(echo $1 | cut -d/ -f2)
 	
 	echo $tmask | egrep "^[[:digit:]]{1,2}$" || return 1
-	[ "$tmask" -gt 32 ] || return 1
+	[ "$tmask" -gt 32 ] && return 1
 	
 	echo $tip | grep -Eq '\b((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4}\b'
 	
 	return $?
+}
+
+## @fn mask2cidr()
+## @brief Used to convert a netmask from IPv4 representation to CIDR representation.
+## @param netmask Netmask to convert.
+## @return CIDR representation.
+mask2cidr() {
+	local x=${1##*255.}
+	set -- 0^^^128^192^224^240^248^252^254^ $(( (${#1} - ${#x})*2 )) ${x%%.*}
+	x=${1%%$3*}
+	echo $(( $2 + (${#x}/4) ))
+}
+
+## @fn cidr2mask()
+## @brief Used to convert a netmask from CIDR representation to IPv4 representation.
+## @param netmask Netmask to convert.
+## @return IPv4 representation.
+cidr2mask() {
+	local i mask=""
+	local full_octets=$(($1/8))
+	local partial_octet=$(($1%8))
+
+	for ((i=0;i<4;i+=1))
+	do
+		if [ $i -lt $full_octets ]
+		then
+			mask+=255
+		elif [ $i -eq $full_octets ]
+		then
+			mask+=$((256 - 2**(8-$partial_octet)))
+		else
+			mask+=0
+		fi
+
+		test $i -lt 3 && mask+=.
+	done
+
+	echo $mask
 }
