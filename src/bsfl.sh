@@ -930,6 +930,28 @@ str_replace() {
 	echo "$DATA" | sed "s/$ORIG/$DEST/g"
 }
 
+## @fn str_replace_in_file()
+## @brief Replaces string of text in file.
+## @param origin String to be matched.
+## @param destination New string that replaces matched string.
+## @param file File to operate on.
+## @retval 0 if succeed.
+str_replace_in_file() {
+	[[ $# -lt 3 ]] && return 1
+	
+	local ORIG="$1"
+	local DEST="$2"
+	
+	for FILE in ${@:3:$#}
+	do
+		file_exists "$FILE" || return 1
+		
+		printf ",s/$ORIG/$DEST/g\nw\nQ" | ed -s "$FILE" > /dev/null 2>&1 || return "$?"
+	done
+	
+	return 0
+}
+
 ## @fn __stack_push_tmp()
 ## @brief Internal use.
 ## @private
@@ -986,26 +1008,6 @@ stack_pop() {
 	else
 		return 0
 	fi
-}
-
-## @fn str_replace_in_file()
-## @brief Replaces string of text in file.
-## @param origin String to be matched.
-## @param destination New string that replaces matched string.
-## @param file File to operate on.
-## @retval 0 if succeed.
-str_replace_in_file() {
-	local ORIG="$1"
-	local DEST="$2"
-	local FILE="$3"
-	
-	has_value FILE
-	die_if_false $? "Empty argument 'file'"
-	file_exists "$FILE"
-	die_if_false $? "File does not exist"
-	
-	printf ",s/$ORIG/$DEST/g\nw\nQ" | ed -s "$FILE" > /dev/null 2>&1
-	return "$?"
 }
 
 ## @fn is_ipv4()
@@ -1066,7 +1068,7 @@ cidr2mask() {
 	local i mask=""
 	local full_octets=$(($1/8))
 	local partial_octet=$(($1%8))
-
+	
 	for ((i=0;i<4;i+=1))
 	do
 		if [ $i -lt $full_octets ]
@@ -1078,9 +1080,9 @@ cidr2mask() {
 		else
 			mask+=0
 		fi
-
+		
 		test $i -lt 3 && mask+=.
 	done
-
+	
 	echo $mask
 }
