@@ -721,7 +721,7 @@ cmd() {
 	COMMAND="$1"
 	msg "Executing: $COMMAND"
 	
-	RESULT=`$COMMAND 2>&1`
+	RESULT=$(eval $COMMAND 2>&1)
 	ERROR="$?"
 	
 	MSG="Command: ${COMMAND:0:29}..."
