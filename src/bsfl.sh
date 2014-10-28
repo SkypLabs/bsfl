@@ -1011,13 +1011,14 @@ stack_pop() {
 }
 
 ## @fn is_ipv4()
-## @brief Used to test an IPv4.
+## @brief Used to test an IPv4 address.
 ## @param address Address to test.
 ## @retval 0 if the address is an IPv4.
 ## @retval 1 in others cases.
 is_ipv4() {
-	echo $1 | grep -Eq '\b((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4}\b'
+	local -r regex='\b((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4}\b'
 	
+	[[ $1 =~ $regex ]]
 	return $?
 }
 
