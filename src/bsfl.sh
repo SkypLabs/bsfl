@@ -1050,6 +1050,35 @@ is_ipv4_subnet() {
 	return $?
 }
 
+## @fn get_ipv4_network()
+## @brief Returns the IPv4 network
+## @param address IPv4 address
+## @param netmask IPv4 netmask
+## @return Network address
+get_ipv4_network() {
+	IFS='.' read -r ipb1 ipb2 ipb3 ipb4 <<< "$1"
+	IFS='.' read -r mb1 mb2 mb3 mb4 <<< "$2"
+	
+	echo "$((ipb1 & mb1)).$((ipb2 & mb2)).$((ipb3 & mb3)).$((ipb4 & mb4))"
+}
+
+## @fn get_ipv4_broadcast()
+## @brief Returns the IPv4 broadcast
+## @param address IPv4 address
+## @param netmask IPv4 netmask
+## @return Broadcast address
+get_ipv4_broadcast() {
+	IFS='.' read -r ipb1 ipb2 ipb3 ipb4 <<< "$1"
+	IFS='.' read -r mb1 mb2 mb3 mb4 <<< "$2"
+	
+	nmb1=$((mb1 ^ 255))
+	nmb2=$((mb2 ^ 255))
+	nmb3=$((mb3 ^ 255))
+	nmb4=$((mb4 ^ 255))
+	
+	echo "$((ipb1 | nmb1)).$((ipb2 | nmb2)).$((ipb3 | nmb3)).$((ipb4 | nmb4))"
+}
+
 ## @fn mask2cidr()
 ## @brief Used to convert a netmask from IPv4 representation to CIDR representation.
 ## @param netmask Netmask to convert.
