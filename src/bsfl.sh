@@ -1035,17 +1035,18 @@ is_fqdn() {
 
 ## @fn is_ipv4_subnet()
 ## @brief Used to test an IPv4 subnet.
-## @param address Address to test.
+## @param address Address to test with /CIDR.
 ## @retval 0 if the address is an IPv4 subnet.
 ## @retval 1 in others cases.
 is_ipv4_subnet() {
-	tip=$(echo $1 | cut -d/ -f1)
-	tmask=$(echo $1 | cut -d/ -f2)
+	local -r regex='^[[:digit:]]{1,2}$'
 	
-	echo $tmask | egrep "^[[:digit:]]{1,2}$" || return 1
-	[ "$tmask" -gt 32 ] && return 1
+	IFS='/' read -r tip tmask <<< "$1"
 	
-	echo $tip | grep -Eq '\b((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4}\b'
+	[[ $tmask =~ $regex ]] || return 1
+	[ "$tmask" -gt 32 ] || [ "$tmask" -lt 1 ] && return 1
+	
+	is_ipv4 $tip
 	
 	return $?
 }
