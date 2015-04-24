@@ -1,7 +1,7 @@
 #!/bin/bash
 
 declare -r DIR=$(cd "$(dirname "$0")" && pwd)
-source $DIR/../src/bsfl.sh
+source $DIR/../lib/bsfl.sh
 
 # --------------------
 
