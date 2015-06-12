@@ -1,2 +1,4 @@
 *.log
 *.txt
+doc/html
+doc/latex
