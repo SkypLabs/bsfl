@@ -1016,7 +1016,7 @@ stack_pop() {
 ## @retval 0 if the address is an IPv4.
 ## @retval 1 in others cases.
 is_ipv4() {
-	local -r regex='\b((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4}\b'
+	local -r regex='^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
 	
 	[[ $1 =~ $regex ]]
 	return $?
