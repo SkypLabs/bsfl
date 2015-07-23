@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 declare -r DIR=$(cd "$(dirname "$0")" && pwd)
 source $DIR/../lib/bsfl.sh
