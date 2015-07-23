@@ -35,7 +35,7 @@ declare DEBUG="no"
 
 ## @var LOGDATEFORMAT
 ## @brief Sets the log data format (syslog style).
-declare LOGDATEFORMAT="%b %e %H:%M:%S"
+declare LOGDATEFORMAT="%FT%T%z"
 
 ## @var LOG_FILE
 ## @brief Sets the log file to use when log are enabled.
