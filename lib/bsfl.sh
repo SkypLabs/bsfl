@@ -133,10 +133,26 @@ declare -r CYAN_BG="tput setab 6"
 # Bug fix for Bash, parsing exclamation mark.
 set +o histexpand
 
+# Groups of functions
+# --------------------------------------------------------------#
+
+## @defgroup array Array
+## @defgroup command Command
+## @defgroup file_and_dir File and Directory
+## @defgroup log Log
+## @defgroup message Message
+## @defgroup misc Miscellaneous
+## @defgroup network Network
+## @defgroup stack Stack
+## @defgroup string String
+## @defgroup time Time
+## @defgroup variable Variable
+
 # Functions
 # --------------------------------------------------------------#
 
 ## @fn defined()
+## @ingroup variable
 ## @brief Tests if a variable is defined.
 ## @param variable Variable to test.
 ## @retval 0 if the variable is defined.
@@ -146,6 +162,7 @@ defined() {
 }
 
 ## @fn has_value()
+## @ingroup variable
 ## @brief Tests if a variable has a value.
 ## @param variable Variable to operate on.
 ## @retval 0 if the variable is defined (set) and value's length > 0.
@@ -160,6 +177,7 @@ has_value() {
 }
 
 ## @fn directory_exists()
+## @ingroup file_and_dir
 ## @brief Tests if a directory exists.
 ## @param directory Directory to operate on.
 ## @retval 0 if a directory exists.
@@ -172,6 +190,7 @@ directory_exists() {
 }
 
 ## @fn file_exists()
+## @ingroup file_and_dir
 ## @brief Tests if a file exists.
 ## @param file File to operate on.
 ## @retval 0 if a (regular) file exists.
@@ -184,6 +203,7 @@ file_exists() {
 }
 
 ## @fn device_exists()
+## @ingroup file_and_dir
 ## @brief Tests if a device exists.
 ## @param device Device file to operate on.
 ## @retval 0 if a device exists.
@@ -196,6 +216,7 @@ device_exists() {
 }
 
 ## @fn tolower()
+## @ingroup string
 ## @brief Returns lowercase string.
 ## @param string String to operate on.
 tolower() {
@@ -203,6 +224,7 @@ tolower() {
 }
 
 ## @fn toupper()
+## @ingroup string
 ## @brief Returns uppercase string.
 ## @param string String to operate on.
 toupper() {
@@ -210,6 +232,7 @@ toupper() {
 }
 
 ## @fn trim()
+## @ingroup string
 ## @brief Returns the first part of a string, delimited by tabs or spaces.
 ## @param string String to operate on.
 trim() {
@@ -217,6 +240,7 @@ trim() {
 }
 
 ## @fn show_usage()
+## @ingroup misc
 ## @brief Dummy function to provide usage instructions.
 ## Override this function if required.
 ## @param message Message to display.
@@ -228,6 +252,7 @@ show_usage() {
 }
 
 ## @fn option_enabled()
+## @ingroup variable
 ## @brief Checks if a variable is set to "y" or "yes".
 ## Usefull for detecting if a configurable option is set or not.
 ## @param variable Variable to test.
@@ -245,6 +270,7 @@ option_enabled() {
 }
 
 ## @fn log2syslog()
+## @ingroup log
 ## @brief Logs a message with syslog.
 ## @param message Message that has to be logged.
 log2syslog() {
@@ -256,6 +282,7 @@ log2syslog() {
 }
 
 ## @fn log()
+## @ingroup log
 ## @brief Writes messages to a log file and/or syslog.
 ## @param message Message that has to be logged.
 ## @param status Message's status.
@@ -288,6 +315,7 @@ log() {
 }
 
 ## @fn msg()
+## @ingroup message
 ## @brief Replaces the 'echo' function in bash scripts.
 ## @details This function basically replaces the 'echo' function in bash scripts.
 ## The added functionality over echo is logging and using colors.
@@ -321,6 +349,7 @@ msg() {
 }
 
 ## @fn log_status()
+## @ingroup log
 ## @brief Logs a message with status.
 ## @details The log message is formatted with the status preceding the message.
 ## @param message Message that has to be logged.
@@ -336,6 +365,7 @@ log_status() {
 }
 
 ## @fn log_emergency()
+## @ingroup log
 ## @brief Logs a message with 'emergency' status.
 ## @param message Message that has to be logged.
 log_emergency() {
@@ -345,6 +375,7 @@ log_emergency() {
 }
 
 ## @fn log_alert()
+## @ingroup log
 ## @brief Logs a message with 'alert' status.
 ## @param message Message that has to be logged.
 log_alert() {
@@ -354,6 +385,7 @@ log_alert() {
 }
 
 ## @fn log_critical()
+## @ingroup log
 ## @brief Logs a message with 'critical' status.
 ## @param message Message that has to be logged.
 log_critical() {
@@ -363,6 +395,7 @@ log_critical() {
 }
 
 ## @fn log_error()
+## @ingroup log
 ## @brief Logs a message with 'error' status.
 ## @param message Message that has to be logged.
 log_error() {
@@ -372,6 +405,7 @@ log_error() {
 }
 
 ## @fn log_warning()
+## @ingroup log
 ## @brief Logs a message with 'warning' status.
 ## @param message Message that has to be logged.
 log_warning() {
@@ -381,6 +415,7 @@ log_warning() {
 }
 
 ## @fn log_notice()
+## @ingroup log
 ## @brief Logs a message with 'notice' status.
 ## @param message Message that has to be logged.
 log_notice() {
@@ -390,6 +425,7 @@ log_notice() {
 }
 
 ## @fn log_info()
+## @ingroup log
 ## @brief Logs a message with 'info' status.
 ## @param message Message that has to be logged.
 log_info() {
@@ -399,6 +435,7 @@ log_info() {
 }
 
 ## @fn log_debug()
+## @ingroup log
 ## @brief Logs a message with 'debug' status.
 ## @param message Message that has to be logged.
 log_debug() {
@@ -408,6 +445,7 @@ log_debug() {
 }
 
 ## @fn log_ok()
+## @ingroup log
 ## @brief Logs a message with 'ok' status.
 ## @param message Message that has to be logged.
 log_ok() {
@@ -417,6 +455,7 @@ log_ok() {
 }
 
 ## @fn log_not_ok()
+## @ingroup log
 ## @brief Logs a message with 'not ok' status.
 ## @param message Message that has to be logged.
 log_not_ok() {
@@ -426,6 +465,7 @@ log_not_ok() {
 }
 
 ## @fn log_failed()
+## @ingroup log
 ## @brief Logs a message with 'failed' status.
 ## @param message Message that has to be logged.
 log_failed() {
@@ -435,6 +475,7 @@ log_failed() {
 }
 
 ## @fn log_success()
+## @ingroup log
 ## @brief Logs a message with 'success' status.
 ## @param message Message that has to be logged.
 log_success() {
@@ -444,6 +485,7 @@ log_success() {
 }
 
 ## @fn log_passed()
+## @ingroup log
 ## @brief Logs a message with 'passed' status.
 ## @param message Message that has to be logged.
 log_passed() {
@@ -453,6 +495,7 @@ log_passed() {
 }
 
 ## @fn msg_status()
+## @ingroup message
 ## @brief Displays a message with its status at the end of the line.
 ## @details It can be used to create status messages other
 ## than the default messages available such as OK or FAIL.
@@ -470,6 +513,7 @@ msg_status() {
 }
 
 ## @fn msg_emergency()
+## @ingroup message
 ## @brief Displays a message with 'emergency' status.
 ## @param message Message that has to be displayed.
 msg_emergency() {
@@ -479,6 +523,7 @@ msg_emergency() {
 }
 
 ## @fn msg_alert()
+## @ingroup message
 ## @brief Displays a message with 'alert' status.
 ## @param message Message that has to be displayed.
 msg_alert() {
@@ -488,6 +533,7 @@ msg_alert() {
 }
 
 ## @fn msg_critical()
+## @ingroup message
 ## @brief Displays a message with 'critical' status.
 ## @param message Message that has to be displayed.
 msg_critical() {
@@ -497,6 +543,7 @@ msg_critical() {
 }
 
 ## @fn msg_error()
+## @ingroup message
 ## @brief Displays a message with 'error' status.
 ## @param message Message that has to be displayed.
 msg_error() {
@@ -506,6 +553,7 @@ msg_error() {
 }
 
 ## @fn msg_warning()
+## @ingroup message
 ## @brief Displays a message with 'warning' status.
 ## @param message Message that has to be displayed.
 msg_warning() {
@@ -515,6 +563,7 @@ msg_warning() {
 }
 
 ## @fn msg_notice()
+## @ingroup message
 ## @brief Displays a message with 'notice' status.
 ## @param message Message that has to be displayed.
 msg_notice() {
@@ -524,6 +573,7 @@ msg_notice() {
 }
 
 ## @fn msg_info()
+## @ingroup message
 ## @brief Displays a message with 'info' status.
 ## @param message Message that has to be displayed.
 msg_info() {
@@ -533,6 +583,7 @@ msg_info() {
 }
 
 ## @fn msg_debug()
+## @ingroup message
 ## @brief Displays a message with 'debug' status.
 ## @param message Message that has to be displayed.
 msg_debug() {
@@ -542,6 +593,7 @@ msg_debug() {
 }
 
 ## @fn msg_ok()
+## @ingroup message
 ## @brief Displays a message with 'ok' status.
 ## @param message Message that has to be displayed.
 msg_ok() {
@@ -551,6 +603,7 @@ msg_ok() {
 }
 
 ## @fn msg_not_ok()
+## @ingroup message
 ## @brief Displays a message with 'not ok' status.
 ## @param message Message that has to be displayed.
 msg_not_ok() {
@@ -560,6 +613,7 @@ msg_not_ok() {
 }
 
 ## @fn msg_failed()
+## @ingroup message
 ## @brief Displays a message with 'failed' status.
 ## @param message Message that has to be displayed.
 msg_failed() {
@@ -569,6 +623,7 @@ msg_failed() {
 }
 
 ## @fn msg_success()
+## @ingroup message
 ## @brief Displays a message with 'success' status.
 ## @param message Message that has to be displayed.
 msg_success() {
@@ -578,6 +633,7 @@ msg_success() {
 }
 
 ## @fn msg_passed()
+## @ingroup message
 ## @brief Displays a message with 'passed' status.
 ## @param message Message that has to be displayed.
 msg_passed() {
@@ -587,6 +643,7 @@ msg_passed() {
 }
 
 ## @fn check_status()
+## @ingroup command
 ## @brief Checks the command's status and displays it.
 ## @param command
 ## @param status
@@ -603,6 +660,7 @@ check_status() {
 }
 
 ## @fn __raw_status()
+## @ingroup message
 ## @brief Internal use.
 ## @private
 ## @details This is a function that just positions
@@ -633,6 +691,7 @@ __raw_status() {
 }
 
 ## @fn display_status()
+## @ingroup message
 ## @brief Converts a status message to a particular color.
 ## @param status Status message.
 display_status() {
@@ -700,6 +759,7 @@ display_status() {
 }
 
 ## @fn bail()
+## @ingroup misc
 ## @brief Exits with error status.
 ## @param message Error message.
 ## @return Error status.
@@ -714,6 +774,7 @@ bail() {
 }
 
 ## @fn cmd()
+## @ingroup command
 ## @brief Executes a command and displays if it succeeded or not.
 ## @param command Command to execute.
 ## @return Error status.
@@ -744,12 +805,14 @@ cmd() {
 }
 
 ## @fn now()
+## @ingroup time
 ## @brief Displays current timestamp.
 now() {
 	echo $(date +%s)
 }
 
 ## @fn elapsed()
+## @ingroup time
 ## @brief Displays the time elapsed between start and stop parameters.
 ## @param start Start timestamp.
 ## @param stop Stop timestamp.
@@ -762,12 +825,14 @@ elapsed() {
 }
 
 ## @fn start_watch()
+## @ingroup time
 ## @brief Starts the watch.
 start_watch() {
 	__START_WATCH=`now`
 }
 
 ## @fn stop_watch()
+## @ingroup time
 ## @brief Stops the watch and displays the time elapsed.
 ## @retval 0 if succeed.
 ## @retval 1 if the watch has not been started.
@@ -783,6 +848,7 @@ stop_watch() {
 }
 
 ## @fn die()
+## @ingroup misc
 ## @brief Prints an error message to stderr and exits
 ## with the return code. The message is also logged.
 ## @param errcode Error code.
@@ -800,6 +866,7 @@ die() {
 } >&2 # function writes to stderr
 
 ## @fn die_if_false()
+## @ingroup misc
 ## @brief If error code is not '0', displays an error
 ## message and exits.
 ## @details Checks if a return code indicates an error
@@ -821,6 +888,7 @@ die_if_false() {
 } >&2 # function writes to stderr
 
 ## @fn die_if_true()
+## @ingroup misc
 ## @brief If error code is '0', displays an error
 ## message and exits.
 ## @details Checks if a return code is '0' and prints
@@ -842,6 +910,7 @@ die_if_true() {
 } >&2 # function writes to stderr
 
 ## @fn __bsfl_array_append()
+## @ingroup array
 ## @brief Internal use.
 ## @private
 ## @param name Array name.
@@ -857,6 +926,7 @@ __bsfl_array_append() {
 }
 
 ## @fn __bsfl_array_append_first()
+## @ingroup array
 ## @brief Internal use.
 ## @private
 ## @param name Array name.
@@ -870,6 +940,7 @@ __bsfl_array_append_first() {
 }
 
 ## @fn __bsfl_array_len()
+## @ingroup array
 ## @brief Internal use.
 ## @private
 ## @param name Array name.
@@ -883,6 +954,7 @@ __bsfl_array_len() {
 }
 
 ## @fn array_append()
+## @ingroup array
 ## @brief Appends one or more items to an array.
 ## @details If the array does not exist, this function will create it.
 ## @param array Array to operate on.
@@ -903,6 +975,7 @@ array_append() {
 }
 
 ## @fn array_size()
+## @ingroup array
 ## @brief Returns the size of an array.
 ## @param array Array to operate on.
 array_size() {
@@ -911,6 +984,7 @@ array_size() {
 }
 
 ## @fn array_print()
+## @ingroup array
 ## @brief Prints the contents of an array.
 ## @param array Array to operate on.
 array_print() {
@@ -918,6 +992,7 @@ array_print() {
 }
 
 ## @fn str_replace()
+## @ingroup string
 ## @brief Replaces some text inside a string.
 ## @param origin String to be matched.
 ## @param destination New string that replaces matched string.
@@ -931,6 +1006,7 @@ str_replace() {
 }
 
 ## @fn str_replace_in_file()
+## @ingroup string
 ## @brief Replaces string of text in file.
 ## @param origin String to be matched.
 ## @param destination New string that replaces matched string.
@@ -953,6 +1029,7 @@ str_replace_in_file() {
 }
 
 ## @fn __stack_push_tmp()
+## @ingroup stack
 ## @brief Internal use.
 ## @private
 ## @param item Item to add on the temporary stack.
@@ -968,6 +1045,7 @@ __stack_push_tmp() {
 }
 
 ## @fn stack_push()
+## @ingroup stack
 ## @brief Adds item on the stack.
 ## @param item Item to add on the stack.
 stack_push() {
@@ -982,6 +1060,7 @@ stack_push() {
 }
 
 ## @fn stack_pop()
+## @ingroup stack
 ## @brief Moves the highest item of the stack in REGISTER variable
 ## and deletes it from the stack.
 ## @retval 0 if succeed.
@@ -1011,6 +1090,7 @@ stack_pop() {
 }
 
 ## @fn is_ipv4()
+## @ingroup network
 ## @brief Used to test an IPv4 address.
 ## @param address Address to test.
 ## @retval 0 if the address is an IPv4.
@@ -1023,6 +1103,7 @@ is_ipv4() {
 }
 
 ## @fn is_fqdn()
+## @ingroup network
 ## @brief Used to test a FQDN address.
 ## @param address Address to test.
 ## @retval 0 if the address is a FQDN.
@@ -1034,6 +1115,7 @@ is_fqdn() {
 }
 
 ## @fn is_ipv4_subnet()
+## @ingroup network
 ## @brief Used to test an IPv4 subnet.
 ## @param address Address to test with /CIDR.
 ## @retval 0 if the address is an IPv4 subnet.
@@ -1052,6 +1134,7 @@ is_ipv4_subnet() {
 }
 
 ## @fn get_ipv4_network()
+## @ingroup network
 ## @brief Returns the IPv4 network
 ## @param address IPv4 address
 ## @param netmask IPv4 netmask
@@ -1064,6 +1147,7 @@ get_ipv4_network() {
 }
 
 ## @fn get_ipv4_broadcast()
+## @ingroup network
 ## @brief Returns the IPv4 broadcast
 ## @param address IPv4 address
 ## @param netmask IPv4 netmask
@@ -1081,6 +1165,7 @@ get_ipv4_broadcast() {
 }
 
 ## @fn mask2cidr()
+## @ingroup network
 ## @brief Used to convert a netmask from IPv4 representation to CIDR representation.
 ## @param netmask Netmask to convert.
 ## @return CIDR representation.
@@ -1092,6 +1177,7 @@ mask2cidr() {
 }
 
 ## @fn cidr2mask()
+## @ingroup network
 ## @brief Used to convert a netmask from CIDR representation to IPv4 representation.
 ## @param netmask Netmask to convert.
 ## @return IPv4 representation.
