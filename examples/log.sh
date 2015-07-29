@@ -5,7 +5,7 @@ source $DIR/../lib/bsfl.sh
 
 # --------------------
 
-msg "The 'LOG_ENABLED' variable is used to enable the logs whereas 'LOG_FILE' is used to speficied the logs file name." "$BOLD"
+msg "The 'LOG_ENABLED' variable is used to enable the logs whereas 'LOG_FILE' is used to specify the logs file name." "$BOLD"
 
 LOG_ENABLED=y
 echo
