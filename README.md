@@ -2,11 +2,11 @@
 
 This project is a fork of the original work of Louwrentius.
 
-The Bash Shell Function Library (BSFL) is a small Bash script that acts as a library for bash scripts. It provides a couple of functions that makes the lives of most people using shell scripts a bit easier.
+The Bash Shell Function Library (BSFL) is a small bash script that acts as a library for bash scripts. It provides a couple of functions that makes the lives of most people using shell scripts a bit easier.
 
 ## Getting started
 
-In order to use BSFL functions, you have to include the library in your Bash scripts. You can do it with an absolute path :
+In order to use BSFL functions, you have to include the library in your bash scripts. You can do it with an absolute path :
 
 	source <absolute path to BSFL>
 
@@ -26,7 +26,7 @@ For example :
 
 ## Dependencies
 
-This library is implemented for bash version 4. Prior versions of bash will fail at interpreting that code.
+BSFL is implemented for bash version 4. Prior versions of bash will fail at interpreting its code.
 
 In addition, BSFL depends of some external programs. Here is the list of these programs :
 
