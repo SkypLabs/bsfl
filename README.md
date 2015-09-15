@@ -44,7 +44,9 @@ However, we try to get as much as possible a standalone library. Hence, some of 
 
 The best way to learn how does BSFL work is to look at the examples available in the [examples][2] folder.
 
-## Build documentation
+## Documentation
+
+The documentation is available online [here][3].
 
 Building the documentation is done by using Doxygen :
 
@@ -57,3 +59,4 @@ Building the documentation is done by using Doxygen :
 
  [1]: http://opensource.org/licenses/BSD-3-Clause
  [2]: https://github.com/SkypLabs/bsfl/tree/master/examples
+ [3]: http://skyplabs.github.io/bsfl
