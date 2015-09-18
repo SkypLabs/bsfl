@@ -1,12 +1,17 @@
-Summary: Bash Shell Function Library.
-Name: bsfl
-Release: 1%{?dist}
-BuildArch: noarch
-Version: 0.1.0
-License: New BSD
-Group: Development/Libraries
-URL: https://github.com/SkypLabs/bsfl
-Source0: %{name}-%{version}.tar.gz
+Name:		bsfl
+Summary:	Bash Shell Function Library
+
+Release:	1%{?rev}%{?dist}
+Version:	0.1.0
+BuildArch:	noarch
+
+License:	New BSD
+Group:		Development/Libraries
+URL:		https://github.com/SkypLabs/bsfl
+
+Source0:	%{name}-%{version}.tar.gz
+
+requires:	bash
 
 %description
 The Bash Shell Function Library (BSFL) is a small Bash script that acts as a library for bash scripts. It provides a couple of functions that makes the lives of most people using shell scripts a bit easier.
