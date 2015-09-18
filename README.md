@@ -1,8 +1,8 @@
 # BSFL
 
-This project is a fork of the original work of Louwrentius.
-
 The Bash Shell Function Library (BSFL) is a small bash script that acts as a library for bash scripts. It provides a couple of functions that makes the lives of most people using shell scripts a bit easier.
+
+This project is a fork of the original work of Louwrentius.
 
 ## Getting started
 
