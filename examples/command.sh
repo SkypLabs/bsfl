@@ -10,7 +10,7 @@ msg "We use the 'cmd' function to execute a command and to display its status :"
 cmd "ls -al"
 echo
 
-cmd "fake_cmd"
+cmd "pnig 8.8.8.8"
 echo
 
 # --------------------
