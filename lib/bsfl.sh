@@ -880,13 +880,13 @@ die_if_true() {
 	fi
 } >&2 # function writes to stderr
 
-## @fn __bsfl_array_append()
+## @fn __array_append()
 ## @ingroup array
 ## @brief Internal use.
 ## @private
 ## @param name Array name.
 ## @param item Item to append.
-__bsfl_array_append() {
+__array_append() {
 	echo -n 'eval '
 	echo -n "$1" # array name
 	echo -n '=( "${'
@@ -896,13 +896,13 @@ __bsfl_array_append() {
 	echo -n '" )'
 }
 
-## @fn __bsfl_array_append_first()
+## @fn __array_append_first()
 ## @ingroup array
 ## @brief Internal use.
 ## @private
 ## @param name Array name.
 ## @param item Item to append.
-__bsfl_array_append_first() {
+__array_append_first() {
     echo -n 'eval '
     echo -n "$1" # array name
     echo -n '=( '
@@ -910,13 +910,13 @@ __bsfl_array_append_first() {
     echo -n ' )'
 }
 
-## @fn __bsfl_array_len()
+## @fn __array_len()
 ## @ingroup array
 ## @brief Internal use.
 ## @private
 ## @param name Array name.
 ## @param item Item to append.
-__bsfl_array_len() {
+__array_len() {
 	echo -n 'eval local '
 	echo -n "$1" # variable name
 	echo -n '=${#'
@@ -932,16 +932,16 @@ __bsfl_array_len() {
 array_append() {
 	local array=$1; shift 1
 	
-	$(__bsfl_array_len len $array)
+	$(__array_len len $array)
 	
 	if (( len == 0 )); then
-		$(__bsfl_array_append_first $array "$1" )
+		$(__array_append_first $array "$1" )
 		shift 1
 	fi
 	
 	local i
 	for i in "$@"; do
-		$(__bsfl_array_append $array "$i")
+		$(__array_append $array "$i")
 	done
 }
 
@@ -950,7 +950,7 @@ array_append() {
 ## @brief Returns the size of an array.
 ## @param array Array to operate on.
 array_size() {
-	$(__bsfl_array_len size $1)
+	$(__array_len size $1)
 	echo "$size"
 }
 
