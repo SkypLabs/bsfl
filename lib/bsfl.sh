@@ -237,18 +237,6 @@ trim() {
 	echo $1
 }
 
-## @fn show_usage()
-## @ingroup misc
-## @brief Dummy function to provide usage instructions.
-## Override this function if required.
-## @param message Message to display.
-## @retval 1 in all cases.
-show_usage() {
-	MESSAGE="$1"
-	echo "$MESSAGE"
-	exit 1
-}
-
 ## @fn option_enabled()
 ## @ingroup variable
 ## @brief Checks if a variable is set to "y" or "yes".
@@ -754,21 +742,6 @@ display_status() {
 	esac
 	
 	__raw_status "$STATUS" "$COLOR"
-}
-
-## @fn bail()
-## @ingroup misc
-## @brief Exits with error status.
-## @param message Error message.
-## @return Error status.
-bail() {
-	ERROR="$?"
-	MSG="$1"
-	if [ ! "$ERROR" = "0" ]
-	then
-		msg_failed "$MSG"
-		exit "$ERROR"
-	fi
 }
 
 ## @fn cmd()
