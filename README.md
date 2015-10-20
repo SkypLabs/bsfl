@@ -53,6 +53,10 @@ Building the documentation is done by using Doxygen :
 	cd <path to BSFL repository>/doc
 	doxygen Doxyfile
 
+## Get involved !
+
+This project is still under development. Contributions are welcomed.
+
 ## License
 
 [New BSD][1]
