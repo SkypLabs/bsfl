@@ -301,3 +301,118 @@ load ../lib/bsfl
 	run is_ipv4 255.255.255.255
 	[ "$status" -eq 0 ]
 }
+
+@test "is_ipv4_subnet() with '192.168.1.0/24'" {
+	run is_ipv4_subnet 192.168.1.0/24
+	[ "$status" -eq 0 ]
+}
+
+@test "is_ipv4_subnet() with '10.0.1.0/8'" {
+	run is_ipv4_subnet 10.0.1.0/8
+	[ "$status" -eq 0 ]
+}
+
+@test "is_ipv4_subnet() with '172.16.1.0/16'" {
+	run is_ipv4_subnet 172.16.1.0/16
+	[ "$status" -eq 0 ]
+}
+
+@test "is_ipv4_subnet() with '172.16.1.1/25'" {
+	run is_ipv4_subnet 172.16.1.1/25
+	[ "$status" -eq 0 ]
+}
+
+@test "is_ipv4_subnet() with '192.168.1.0/04'" {
+	run is_ipv4_subnet 192.168.1.0/04
+	[ "$status" -eq 0 ]
+}
+
+@test "is_ipv4_subnet() with '0.0.0.0/0'" {
+	run is_ipv4_subnet 0.0.0.0/0
+	[ "$status" -eq 0 ]
+}
+
+@test "is_ipv4_subnet() with '172.16.1.0/0'" {
+	run is_ipv4_subnet 172.16.1.0/0
+	[ "$status" -eq 0 ]
+}
+
+@test "is_ipv4_subnet() with '172.16.1.4/32'" {
+	run is_ipv4_subnet 172.16.1.4/32
+	[ "$status" -eq 0 ]
+}
+
+@test "is_ipv4_subnet() with an empty string" {
+	run is_ipv4_subnet ''
+	[ "$status" -eq 1 ]
+}
+
+@test "is_ipv4_subnet() with '192.168.1.0/24f'" {
+	run is_ipv4_subnet 192.168.1.0/24f
+	[ "$status" -eq 1 ]
+}
+
+@test "is_ipv4_subnet() with '10.0.1.0/1++'" {
+	run is_ipv4_subnet 10.0.1.0/1++
+	[ "$status" -eq 1 ]
+}
+
+@test "is_ipv4_subnet() with '10.0.1.0/-1'" {
+	run is_ipv4_subnet 10.0.1.0/-1
+	[ "$status" -eq 1 ]
+}
+
+@test "is_ipv4_subnet() with '10.0.1.0//'" {
+	run is_ipv4_subnet 10.0.1.0/it
+	[ "$status" -eq 1 ]
+}
+
+@test "is_ipv4_subnet() with '10.0.1.0/:'" {
+	run is_ipv4_subnet 10.0.1.0/:
+	[ "$status" -eq 1 ]
+}
+
+@test "is_ipv4_subnet() with '172.16.1.0//16'" {
+	run is_ipv4_subnet 172.16.1.0//16
+	[ "$status" -eq 1 ]
+}
+
+@test "is_ipv4_subnet() with '0x7f.16.1.0/16'" {
+	run is_ipv4_subnet 0x7f.16.1.0/16
+	[ "$status" -eq 1 ]
+}
+
+@test "is_ipv4_subnet() with '10...0/8'" {
+	run is_ipv4_subnet 10...0/8
+	[ "$status" -eq 1 ]
+}
+
+@test "is_ipv4_subnet() with '172.16.1.0\16'" {
+	run is_ipv4_subnet 172.16.1.0\16
+	[ "$status" -eq 1 ]
+}
+
+@test "is_ipv4_subnet() with '10.0.1.0/00'" {
+	run is_ipv4_subnet 10.0.1.0/00
+	[ "$status" -eq 1 ]
+}
+
+@test "is_ipv4_subnet() with '10.10.1.8.0/24'" {
+	run is_ipv4_subnet 10.10.1.8.0/24
+	[ "$status" -eq 1 ]
+}
+
+@test "is_ipv4_subnet() with '10.24.1\\.0/24'" {
+	run is_ipv4_subnet 10.24.1\\.0/24
+	[ "$status" -eq 1 ]
+}
+
+@test "is_ipv4_subnet() with '10.0.1.1o1/24'" {
+	run is_ipv4_subnet 10.0.1.1o1/24
+	[ "$status" -eq 1 ]
+}
+
+@test "is_ipv4_subnet() with '10.0.1.0/8.0/24'" {
+	run is_ipv4_subnet 10.0.1.0/8.0/24
+	[ "$status" -eq 1 ]
+}
