@@ -416,3 +416,68 @@ load ../lib/bsfl
 	run is_ipv4_subnet 10.0.1.0/8.0/24
 	[ "$status" -eq 1 ]
 }
+
+@test "is_fqdn() with 'www.google.com'" {
+	run is_fqdn www.google.com
+	[ "$status" -eq 0 ]
+}
+
+@test "is_fqdn() with 'www.google.com.'" {
+	run is_fqdn www.google.com.
+	[ "$status" -eq 0 ]
+}
+
+@test "is_fqdn() with 'localhost.local'" {
+	run is_fqdn localhost.local
+	[ "$status" -eq 0 ]
+}
+
+@test "is_fqdn() with 'www.google.com.com'" {
+	run is_fqdn www.google.com.com
+	[ "$status" -eq 0 ]
+}
+
+@test "is_fqdn() with 'r5---sn-cg07luek.googlevideo.com'" {
+	run is_fqdn r5---sn-cg07luek.googlevideo.com
+	[ "$status" -eq 0 ]
+}
+
+@test "is_fqdn() with 'www.www.google.com'" {
+	run is_fqdn www.www.google.com
+	[ "$status" -eq 0 ]
+}
+
+@test "is_fqdn() with 'www.a./.com'" {
+	run is_fqdn 'www.a./.com'
+	[ "$status" -eq 1 ]
+}
+
+@test "is_fqdn() with 'www.attr@ctiveworld.com'" {
+	run is_fqdn www.attr@ctiveworld.com
+	[ "$status" -eq 1 ]
+}
+
+@test "is_fqdn() with 'www.~.com'" {
+	run is_fqdn 'www.~.com'
+	[ "$status" -eq 1 ]
+}
+
+@test "is_fqdn() with 'www.\x41.com'" {
+	run is_fqdn 'www.\x41.com'
+	[ "$status" -eq 1 ]
+}
+
+@test "is_fqdn() with 'azertyuiop'" {
+	run is_fqdn azertyuiop
+	[ "$status" -eq 1 ]
+}
+
+@test "is_fqdn() with an IPv4" {
+	run is_fqdn 192.168.1.1
+	[ "$status" -eq 1 ]
+}
+
+@test "is_fqdn() with an IPv6" {
+	run is_fqdn 2001:db8:1f89:0:0:0:0:0
+	[ "$status" -eq 1 ]
+}
