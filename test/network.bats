@@ -481,3 +481,73 @@ load ../lib/bsfl
 	run is_fqdn 2001:db8:1f89:0:0:0:0:0
 	[ "$status" -eq 1 ]
 }
+
+@test "mask2cidr() with an empty string" {
+	run mask2cidr ''
+	[ "$status" -eq 1 ]
+}
+
+@test "mask2cidr() with '255.255.255.0'" {
+	run mask2cidr 255.255.255.0
+	[ "$status" -eq 0 ]
+	[ "$output" == '24' ]
+}
+
+@test "mask2cidr() with '278.255.255.0'" {
+	run mask2cidr 278.255.255.0
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
+
+@test "mask2cidr() with '25f.255.255.0'" {
+	run mask2cidr 25f.255.255.0
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
+
+@test "mask2cidr() with '255.0.255.0'" {
+	run mask2cidr 255.0.255.0
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
+
+@test "cidr2mask() with '0'" {
+	run cidr2mask 0
+	[ "$status" -eq 0 ]
+	[ "$output" == '0.0.0.0' ]
+}
+
+@test "cidr2mask() with '24'" {
+	run cidr2mask 24
+	[ "$status" -eq 0 ]
+	[ "$output" == '255.255.255.0' ]
+}
+
+@test "cidr2mask() with '32'" {
+	run cidr2mask 32
+	[ "$status" -eq 0 ]
+	[ "$output" == '255.255.255.255' ]
+}
+
+@test "cidr2mask() with an empty string" {
+	run cidr2mask ''
+	[ "$status" -eq 1 ]
+}
+
+@test "cidr2mask() with '33'" {
+	run cidr2mask 33
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
+
+@test "cidr2mask() with '3f'" {
+	run cidr2mask 3f
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
+
+@test "cidr2mask() with '-3'" {
+	run cidr2mask -3
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
