@@ -31,3 +31,33 @@ load ../lib/bsfl
 	[ "$status" -eq 0 ]
 	[ "$output" = '-5' ]
 }
+
+@test "start_watch() and stop_watch() with a 3s interval" {
+	start_watch
+	sleep 3
+	run stop_watch
+	[ "$status" -eq 0 ]
+	[ "$output" = '3' ]
+}
+
+@test "start_watch() and stop_watch() with a 5s interval" {
+	start_watch
+	sleep 5
+	run stop_watch
+	[ "$status" -eq 0 ]
+	[ "$output" = '5' ]
+}
+
+@test "start_watch() and stop_watch() with a 7s interval" {
+	start_watch
+	sleep 7
+	run stop_watch
+	[ "$status" -eq 0 ]
+	[ "$output" = '7' ]
+}
+
+@test "stop_watch() without start_watch()" {
+	run stop_watch
+	[ "$status" -eq 1 ]
+	[ "$output" = '' ]
+}
