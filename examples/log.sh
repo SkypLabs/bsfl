@@ -25,9 +25,9 @@ echo
 
 # --------------------
 
-msg "The 'log' function is used to log a message with the status given as parameter." "$BOLD"
+msg "The 'log_status' function is used to log a message with the status given as parameter." "$BOLD"
 
-log "This is a test message." INFO
+log_status "This is a test message." INFO
 echo
 
 # --------------------
