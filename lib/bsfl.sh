@@ -1097,7 +1097,7 @@ is_ipv4_subnet() {
 	IFS='/' read -r tip tmask <<< "$1"
 	
 	[[ $tmask =~ $regex ]] || return 1
-	[ "$tmask" -gt 32 ] || [ "$tmask" -lt 1 ] && return 1
+	[ "$tmask" -gt 32 ] || [ "$tmask" -lt 0 ] && return 1
 	
 	is_ipv4 $tip
 	

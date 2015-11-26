@@ -337,6 +337,11 @@ load ../lib/bsfl
 	[ "$status" -eq 0 ]
 }
 
+@test "is_ipv4_subnet() with '172.16.1.0/00'" {
+	run is_ipv4_subnet 172.16.1.0/00
+	[ "$status" -eq 0 ]
+}
+
 @test "is_ipv4_subnet() with '172.16.1.4/32'" {
 	run is_ipv4_subnet 172.16.1.4/32
 	[ "$status" -eq 0 ]
@@ -389,11 +394,6 @@ load ../lib/bsfl
 
 @test "is_ipv4_subnet() with '172.16.1.0\16'" {
 	run is_ipv4_subnet 172.16.1.0\16
-	[ "$status" -eq 1 ]
-}
-
-@test "is_ipv4_subnet() with '10.0.1.0/00'" {
-	run is_ipv4_subnet 10.0.1.0/00
 	[ "$status" -eq 1 ]
 }
 
