@@ -1080,7 +1080,7 @@ is_ipv4() {
 ## @retval 0 if the address is a FQDN.
 ## @retval 1 in others cases.
 is_fqdn() {
-	echo $1 | grep -Pq '(?=^.{4,255}$)(^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\.)+[a-zA-Z]{2,63}$)'
+	echo $1 | grep -Pq '(?=^.{4,255}$)(^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\.)+[a-zA-Z]{2,63}\.?$)'
 	
 	return $?
 }
