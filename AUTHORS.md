@@ -1,12 +1,12 @@
 Original Authors
 ----------------
 
- * [Louwrentius](louwrentius@gmail.com)
- * [Paul-Emmanuel Raoul](skyper@skyplabs.net)
+ * [Louwrentius](mailto:louwrentius@gmail.com)
+ * [Paul-Emmanuel Raoul](mailto:skyper@skyplabs.net)
 
 Contributors
 ------------
 
- * [Gnarstick](gromly@hotmail.fr)
+ * [Gnarstick](mailto:gromly@hotmail.fr)
  * Jani Hurskainen
- * [OnTheWired](onthewired@mmoplayer.fr)
+ * [OnTheWired](mailto:onthewired@mmoplayer.fr)
