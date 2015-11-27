@@ -1153,6 +1153,11 @@ mask2cidr() {
 ## @param netmask Netmask to convert.
 ## @return IPv4 representation.
 cidr2mask() {
+	local -r regex='^[[:digit:]]{1,2}$'
+	
+	[[ $1 =~ $regex ]] || return 1
+	[ "$1" -gt 32 ] || [ "$1" -lt 0 ] && return 1
+	
 	local i mask=""
 	local full_octets=$(($1/8))
 	local partial_octet=$(($1%8))
