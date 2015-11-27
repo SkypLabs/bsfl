@@ -3,7 +3,6 @@
 
 ## @file
 ## @author Louwrentius <louwrentius@gmail.com>
-## @author Jani Hurskainen
 ## @author Paul-Emmanuel Raoul <skyper@skyplabs.net>
 ## @brief Bash Shell Function Library
 ## @copyright New BSD
