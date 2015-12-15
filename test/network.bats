@@ -12,11 +12,6 @@ load ../lib/bsfl
 	[ "$status" -eq 1 ]
 }
 
-@test "is_ipv4() with '.'" {
-	run is_ipv4 .
-	[ "$status" -eq 1 ]
-}
-
 @test "is_ipv4() with '..'" {
 	run is_ipv4 ..
 	[ "$status" -eq 1 ]
