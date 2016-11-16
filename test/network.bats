@@ -488,6 +488,12 @@ load ../lib/bsfl
 	[ "$output" == '24' ]
 }
 
+@test "mask2cidr() with '255.255.255.255.0'" {
+	run mask2cidr 255.255.255.255.0
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
+
 @test "mask2cidr() with '278.255.255.0'" {
 	run mask2cidr 278.255.255.0
 	[ "$status" -eq 1 ]
