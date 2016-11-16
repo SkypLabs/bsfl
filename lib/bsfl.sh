@@ -277,19 +277,19 @@ log() {
 		LOG_MESSAGE="$1"
 		STATE="$2"
 		DATE=`date +"$LOGDATEFORMAT"`
-		
+
 		if has_value LOG_MESSAGE
 		then
 			LOG_STRING="$DATE $STATE - $LOG_MESSAGE"
 		else
 			LOG_STRING="$DATE -- empty log message, no input received --"
 		fi
-		
+
 		if option_enabled LOG_ENABLED
 		then
 			echo "$LOG_STRING" >> "$LOG_FILE"
 		fi
-		
+
 		if option_enabled SYSLOG_ENABLED
 		then
 			# Syslog already prepends a date/time stamp so only the message
@@ -309,12 +309,12 @@ log() {
 msg() {
 	MESSAGE="$1"
 	COLOR="$2"
-	
+
 	if ! has_value COLOR
 	then
 		COLOR="$DEFAULT"
 	fi
-	
+
 	if has_value "MESSAGE"
 	then
 		$COLOR
@@ -344,7 +344,7 @@ log_status() {
 	then 
 		MESSAGE="$1"
 		STATUS="$2"
-		
+
 		log "$MESSAGE" "$STATUS"
 	fi
 }
@@ -489,7 +489,7 @@ log_passed() {
 msg_status() {
 	MESSAGE="$1"
 	STATUS="$2"
-	
+
 	export DONOTLOG="yes"
 	log_status "$MESSAGE" "$STATUS"
 	msg "$MESSAGE"
@@ -635,7 +635,7 @@ msg_passed() {
 check_status() {
 	CMD="$1"
 	STATUS="$2"
-	
+
 	if [ "$STATUS" == "0" ]
 	then
 		msg_ok "$CMD"
@@ -658,13 +658,13 @@ check_status() {
 __raw_status() {
 	STATUS="$1"
 	COLOR="$2"
-	
+
 	position_cursor () {
 		let RES_COL=`tput cols`-12
 		tput cuf $RES_COL
 		tput cuu1
     }
-	
+
 	position_cursor
 	echo -n "["
 	$DEFAULT
@@ -681,7 +681,7 @@ __raw_status() {
 ## @param status Status message.
 display_status() {
 	STATUS="$1"
-	
+
 	case $STATUS in
 		EMERGENCY )
 			STATUS="EMERGENCY"
@@ -739,7 +739,7 @@ display_status() {
 			STATUS="UNDEFINED"
 			COLOR="$YELLOW"
 	esac
-	
+
 	__raw_status "$STATUS" "$COLOR"
 }
 
@@ -751,14 +751,14 @@ display_status() {
 cmd() {
 	COMMAND="$1"
 	msg "Executing: $COMMAND"
-	
+
 	RESULT=$(eval $COMMAND 2>&1)
 	ERROR="$?"
-	
+
 	MSG="Command: ${COMMAND:0:29}..."
-    
+
 	tput cuu1
-	
+
 	if [ "$ERROR" == "0" ]
 	then
 		msg_ok "$MSG"
@@ -770,7 +770,7 @@ cmd() {
 		msg_failed "$MSG"
 		log "$RESULT"
 	fi
-	
+
 	return "$ERROR"
 }
 
@@ -789,7 +789,7 @@ now() {
 elapsed() {
 	START="$1"
 	STOP="$2"
-	
+
 	ELAPSED=$(( STOP - START ))
 	echo $ELAPSED
 }
@@ -828,7 +828,7 @@ die() {
 	local -r err_code="$1"
 	local -r err_msg="$2"
 	local -r err_caller="${3:-$(caller 0)}"
-	
+
 	msg_failed "ERROR: $err_msg"
 	msg_failed "ERROR: At line $err_caller"
 	msg_failed "ERROR: Error code = $err_code"
@@ -850,7 +850,7 @@ die_if_false() {
 	local -r err_code=$1
 	local -r err_msg=$2
 	local -r err_caller=$(caller 0)
-	
+
 	if [[ "$err_code" != "0" ]]
 	then
 		die $err_code "$err_msg" "$err_caller"
@@ -872,7 +872,7 @@ die_if_true() {
 	local -r err_code=$1
 	local -r err_msg=$2
 	local -r err_caller=$(caller 0)
-	
+
 	if [[ "$err_code" == "0" ]]
 	then
 		die $err_code "$err_msg" "$err_caller"
@@ -930,14 +930,14 @@ __array_len() {
 ## @param array Array to operate on.
 array_append() {
 	local array=$1; shift 1
-	
+
 	$(__array_len len $array)
-	
+
 	if (( len == 0 )); then
 		$(__array_append_first $array "$1" )
 		shift 1
 	fi
-	
+
 	local i
 	for i in "$@"; do
 		$(__array_append $array "$i")
@@ -971,7 +971,7 @@ str_replace() {
 	local ORIG="$1"
 	local DEST="$2"
 	local DATA="$3"
-	
+
 	echo "$DATA" | sed "s/$ORIG/$DEST/g"
 }
 
@@ -984,17 +984,17 @@ str_replace() {
 ## @retval 0 if succeed.
 str_replace_in_file() {
 	[[ $# -lt 3 ]] && return 1
-	
+
 	local ORIG="$1"
 	local DEST="$2"
-	
+
 	for FILE in ${@:3:$#}
 	do
 		file_exists "$FILE" || return 1
-		
+
 		printf ",s/$ORIG/$DEST/g\nw\nQ" | ed -s "$FILE" > /dev/null 2>&1 || return "$?"
 	done
-	
+
 	return 0
 }
 
@@ -1005,7 +1005,7 @@ str_replace_in_file() {
 ## @param item Item to add on the temporary stack.
 __stack_push_tmp() {
 	local TMP="$1"
-	
+
 	if has_value __TMP_STACK
 	then
 		__TMP_STACK="$TMP"
@@ -1020,7 +1020,7 @@ __stack_push_tmp() {
 ## @param item Item to add on the stack.
 stack_push() {
 	line="$1"
-	
+
 	if has_value $__STACK
 	then
 		__STACK="$line"
@@ -1067,7 +1067,7 @@ stack_pop() {
 ## @retval 1 in others cases.
 is_ipv4() {
 	local -r regex='^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
-	
+
 	[[ $1 =~ $regex ]]
 	return $?
 }
@@ -1080,7 +1080,7 @@ is_ipv4() {
 ## @retval 1 in others cases.
 is_fqdn() {
 	echo $1 | grep -Pq '(?=^.{4,255}$)(^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\.)+[a-zA-Z]{2,63}\.?$)'
-	
+
 	return $?
 }
 
@@ -1092,14 +1092,14 @@ is_fqdn() {
 ## @retval 1 in others cases.
 is_ipv4_subnet() {
 	local -r regex='^[[:digit:]]{1,2}$'
-	
+
 	IFS='/' read -r tip tmask <<< "$1"
-	
+
 	[[ $tmask =~ $regex ]] || return 1
 	[ "$tmask" -gt 32 ] || [ "$tmask" -lt 0 ] && return 1
-	
+
 	is_ipv4 $tip
-	
+
 	return $?
 }
 
@@ -1112,7 +1112,7 @@ is_ipv4_subnet() {
 get_ipv4_network() {
 	IFS='.' read -r ipb1 ipb2 ipb3 ipb4 <<< "$1"
 	IFS='.' read -r mb1 mb2 mb3 mb4 <<< "$2"
-	
+
 	echo "$((ipb1 & mb1)).$((ipb2 & mb2)).$((ipb3 & mb3)).$((ipb4 & mb4))"
 }
 
@@ -1125,12 +1125,12 @@ get_ipv4_network() {
 get_ipv4_broadcast() {
 	IFS='.' read -r ipb1 ipb2 ipb3 ipb4 <<< "$1"
 	IFS='.' read -r mb1 mb2 mb3 mb4 <<< "$2"
-	
+
 	nmb1=$((mb1 ^ 255))
 	nmb2=$((mb2 ^ 255))
 	nmb3=$((mb3 ^ 255))
 	nmb4=$((mb4 ^ 255))
-	
+
 	echo "$((ipb1 | nmb1)).$((ipb2 | nmb2)).$((ipb3 | nmb3)).$((ipb4 | nmb4))"
 }
 
@@ -1153,14 +1153,14 @@ mask2cidr() {
 ## @return IPv4 representation.
 cidr2mask() {
 	local -r regex='^[[:digit:]]{1,2}$'
-	
+
 	[[ $1 =~ $regex ]] || return 1
 	[ "$1" -gt 32 ] || [ "$1" -lt 0 ] && return 1
-	
+
 	local i mask=""
 	local full_octets=$(($1/8))
 	local partial_octet=$(($1%8))
-	
+
 	for ((i=0;i<4;i+=1))
 	do
 		if [ $i -lt $full_octets ]
@@ -1172,9 +1172,9 @@ cidr2mask() {
 		else
 			mask+=0
 		fi
-		
+
 		test $i -lt 3 && mask+=.
 	done
-	
+
 	echo $mask
 }
