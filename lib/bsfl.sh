@@ -148,6 +148,9 @@ set +o histexpand
 # Functions
 # --------------------------------------------------------------#
 
+# Group: Variable
+# ----------------------------------------------------#
+
 ## @fn defined()
 ## @ingroup variable
 ## @brief Tests if a variable is defined.
@@ -172,6 +175,27 @@ has_value() {
 	fi
 	return 1
 }
+
+## @fn option_enabled()
+## @ingroup variable
+## @brief Checks if a variable is set to "y" or "yes".
+## Usefull for detecting if a configurable option is set or not.
+## @param variable Variable to test.
+## @retval 0 if the variable is set to "y" or "yes".
+## @retval 1 in others cases.
+option_enabled() {
+	VAR="$1"
+	VAR_VALUE=$(eval echo \$$VAR)
+	if [[ "$VAR_VALUE" == "y" ]] || [[ "$VAR_VALUE" == "yes" ]]
+	then
+		return 0
+	else
+		return 1
+	fi
+}
+
+# Group: File and Directory
+# ----------------------------------------------------#
 
 ## @fn directory_exists()
 ## @ingroup file_and_dir
@@ -212,6 +236,9 @@ device_exists() {
 	return 1
 }
 
+# Group: String
+# ----------------------------------------------------#
+
 ## @fn tolower()
 ## @ingroup string
 ## @brief Returns lowercase string.
@@ -236,23 +263,8 @@ trim() {
 	echo $1
 }
 
-## @fn option_enabled()
-## @ingroup variable
-## @brief Checks if a variable is set to "y" or "yes".
-## Usefull for detecting if a configurable option is set or not.
-## @param variable Variable to test.
-## @retval 0 if the variable is set to "y" or "yes".
-## @retval 1 in others cases.
-option_enabled() {
-	VAR="$1"
-	VAR_VALUE=$(eval echo \$$VAR)
-	if [[ "$VAR_VALUE" == "y" ]] || [[ "$VAR_VALUE" == "yes" ]]
-	then
-		return 0
-	else
-		return 1
-	fi
-}
+# Group: Log
+# ----------------------------------------------------#
 
 ## @fn log2syslog()
 ## @ingroup log
@@ -295,40 +307,6 @@ log() {
 			# Syslog already prepends a date/time stamp so only the message
 			# is logged.
 			log2syslog "$LOG_MESSAGE"
-		fi
-	fi
-}
-
-## @fn msg()
-## @ingroup message
-## @brief Replaces the 'echo' function in bash scripts.
-## @details This function basically replaces the 'echo' function in bash scripts.
-## The added functionality over echo is logging and using colors.
-## @param string String / message that must be displayed.
-## @param color Text color.
-msg() {
-	MESSAGE="$1"
-	COLOR="$2"
-
-	if ! has_value COLOR
-	then
-		COLOR="$DEFAULT"
-	fi
-
-	if has_value "MESSAGE"
-	then
-		$COLOR
-		echo "$MESSAGE"
-		$DEFAULT
-		if ! option_enabled "DONOTLOG"
-		then
-			log "$MESSAGE"
-		fi
-	else
-		echo "-- no message received --"
-		if ! option_enabled "DONOTLOG"
-		then
-			log "$MESSAGE"
 		fi
 	fi
 }
@@ -479,6 +457,43 @@ log_passed() {
 	log_status "$MESSAGE" "$STATUS"
 }
 
+# Group: Message
+# ----------------------------------------------------#
+
+## @fn msg()
+## @ingroup message
+## @brief Replaces the 'echo' function in bash scripts.
+## @details This function basically replaces the 'echo' function in bash scripts.
+## The added functionality over echo is logging and using colors.
+## @param string String / message that must be displayed.
+## @param color Text color.
+msg() {
+	MESSAGE="$1"
+	COLOR="$2"
+
+	if ! has_value COLOR
+	then
+		COLOR="$DEFAULT"
+	fi
+
+	if has_value "MESSAGE"
+	then
+		$COLOR
+		echo "$MESSAGE"
+		$DEFAULT
+		if ! option_enabled "DONOTLOG"
+		then
+			log "$MESSAGE"
+		fi
+	else
+		echo "-- no message received --"
+		if ! option_enabled "DONOTLOG"
+		then
+			log "$MESSAGE"
+		fi
+	fi
+}
+
 ## @fn msg_status()
 ## @ingroup message
 ## @brief Displays a message with its status at the end of the line.
@@ -627,23 +642,6 @@ msg_passed() {
 	msg_status "$MESSAGE" "$STATUS"
 }
 
-## @fn check_status()
-## @ingroup command
-## @brief Checks the command's status and displays it.
-## @param command
-## @param status
-check_status() {
-	CMD="$1"
-	STATUS="$2"
-
-	if [ "$STATUS" == "0" ]
-	then
-		msg_ok "$CMD"
-	else
-		msg_failed "$CMD"
-	fi
-}
-
 ## @fn __raw_status()
 ## @ingroup message
 ## @brief Internal use.
@@ -743,6 +741,9 @@ display_status() {
 	__raw_status "$STATUS" "$COLOR"
 }
 
+# Group: Command
+# ----------------------------------------------------#
+
 ## @fn cmd()
 ## @ingroup command
 ## @brief Executes a command and displays if it succeeded or not.
@@ -773,6 +774,26 @@ cmd() {
 
 	return "$ERROR"
 }
+
+## @fn check_status()
+## @ingroup command
+## @brief Checks the command's status and displays it.
+## @param command
+## @param status
+check_status() {
+	CMD="$1"
+	STATUS="$2"
+
+	if [ "$STATUS" == "0" ]
+	then
+		msg_ok "$CMD"
+	else
+		msg_failed "$CMD"
+	fi
+}
+
+# Group: Time
+# ----------------------------------------------------#
 
 ## @fn now()
 ## @ingroup time
@@ -816,6 +837,9 @@ stop_watch() {
 		return 1
 	fi
 }
+
+# Group: Miscellaneous
+# ----------------------------------------------------#
 
 ## @fn die()
 ## @ingroup misc
@@ -878,6 +902,9 @@ die_if_true() {
 		die $err_code "$err_msg" "$err_caller"
 	fi
 } >&2 # function writes to stderr
+
+# Group: Array
+# ----------------------------------------------------#
 
 ## @fn __array_append()
 ## @ingroup array
@@ -961,6 +988,9 @@ array_print() {
 	eval "printf '%s\n' \"\${$1[@]}\""
 }
 
+# Group: String
+# ----------------------------------------------------#
+
 ## @fn str_replace()
 ## @ingroup string
 ## @brief Replaces some text inside a string.
@@ -997,6 +1027,9 @@ str_replace_in_file() {
 
 	return 0
 }
+
+# Group: Stack
+# ----------------------------------------------------#
 
 ## @fn __stack_push_tmp()
 ## @ingroup stack
@@ -1058,6 +1091,9 @@ stack_pop() {
 		return 0
 	fi
 }
+
+# Group: Network
+# ----------------------------------------------------#
 
 ## @fn is_ipv4()
 ## @ingroup network
