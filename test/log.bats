@@ -44,7 +44,7 @@ teardown() {
 	[ ! -f "$LOG_FILE" ]
 }
 
-@test "msg() with an empty message" {
+@test "msg() with an empty message and with 'LOG_ENABLED=yes'" {
 	LOG_ENABLED=yes
 	msg && [ "$?" -eq 0 ]
 
