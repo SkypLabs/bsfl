@@ -1120,6 +1120,21 @@ is_fqdn() {
 	return $?
 }
 
+## @fn is_ipv4_cidr()
+## @ingroup network
+## @brief Used to test an IPv4 CIDR netmask.
+## @param netmask CIDR netmask to test.
+## @retval 0 if the IPv4 CIDR netmask is valid.
+## @retval 1 in others cases.
+is_ipv4_cidr() {
+	local -r regex='^[[:digit:]]{1,2}$'
+
+	[[ $1 =~ $regex ]] || return 1
+	[ "$1" -gt 32 ] || [ "$1" -lt 0 ] && return 1
+
+    return 0
+}
+
 ## @fn is_ipv4_subnet()
 ## @ingroup network
 ## @brief Used to test an IPv4 subnet.
@@ -1127,16 +1142,12 @@ is_fqdn() {
 ## @retval 0 if the address is an IPv4 subnet.
 ## @retval 1 in others cases.
 is_ipv4_subnet() {
-	local -r regex='^[[:digit:]]{1,2}$'
-
 	IFS='/' read -r tip tmask <<< "$1"
 
-	[[ $tmask =~ $regex ]] || return 1
-	[ "$tmask" -gt 32 ] || [ "$tmask" -lt 0 ] && return 1
+    is_ipv4_cidr $tmask || return 1
+	is_ipv4 $tip || return 1
 
-	is_ipv4 $tip
-
-	return $?
+	return 0
 }
 
 ## @fn get_ipv4_network()
@@ -1188,10 +1199,7 @@ mask2cidr() {
 ## @param netmask Netmask to convert.
 ## @return IPv4 representation.
 cidr2mask() {
-	local -r regex='^[[:digit:]]{1,2}$'
-
-	[[ $1 =~ $regex ]] || return 1
-	[ "$1" -gt 32 ] || [ "$1" -lt 0 ] && return 1
+    is_ipv4_cidr $1 || return 1
 
 	local i mask=""
 	local full_octets=$(($1/8))
