@@ -2,6 +2,9 @@
 
 load ../lib/bsfl
 
+# array_append()
+# --------------------------------------------------------------#
+
 @test "array_append() with an empty value and array_size() should return 0" {
 	array_append tab && [ "$?" -eq 0 ]
 

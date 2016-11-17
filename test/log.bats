@@ -10,6 +10,9 @@ teardown() {
 	rm -f $LOG_FILE
 }
 
+# log()
+# --------------------------------------------------------------#
+
 @test "log() with 'LOG_ENABLED=no'" {
 	log 'Test log message' && [ "$?" -eq 0 ]
 
@@ -32,6 +35,9 @@ teardown() {
 	grep 'Test log message' $LOG_FILE
 }
 
+# msg() (for its ability to log messages)
+# --------------------------------------------------------------#
+
 @test "msg() with 'LOG_ENABLED=no'" {
 	msg 'Test message' && [ "$?" -eq 0 ]
 
@@ -53,6 +59,9 @@ teardown() {
 	[ -f "$LOG_FILE" ]
 	grep 'Test message' $LOG_FILE
 }
+
+# log_status()
+# --------------------------------------------------------------#
 
 @test "log_status() with an empty message" {
 	LOG_ENABLED=yes
@@ -79,6 +88,9 @@ teardown() {
 	grep 'Test log message' $LOG_FILE
 }
 
+# log_alert()
+# --------------------------------------------------------------#
+
 @test "log_alert() with no message" {
 	LOG_ENABLED=yes
 	log_alert && [ "$?" -eq 0 ]
@@ -95,6 +107,9 @@ teardown() {
 	grep 'ALERT' $LOG_FILE
 	grep 'Test log message' $LOG_FILE
 }
+
+# log_critical()
+# --------------------------------------------------------------#
 
 @test "log_critical() with no message" {
 	LOG_ENABLED=yes
@@ -113,6 +128,9 @@ teardown() {
 	grep 'Test log message' $LOG_FILE
 }
 
+# log_debug()
+# --------------------------------------------------------------#
+
 @test "log_debug() with no message" {
 	LOG_ENABLED=yes
 	log_debug && [ "$?" -eq 0 ]
@@ -129,6 +147,9 @@ teardown() {
 	grep 'DEBUG' $LOG_FILE
 	grep 'Test log message' $LOG_FILE
 }
+
+# log_emergency()
+# --------------------------------------------------------------#
 
 @test "log_emergency() with no message" {
 	LOG_ENABLED=yes
@@ -147,6 +168,9 @@ teardown() {
 	grep 'Test log message' $LOG_FILE
 }
 
+# log_error()
+# --------------------------------------------------------------#
+
 @test "log_error() with no message" {
 	LOG_ENABLED=yes
 	log_error && [ "$?" -eq 0 ]
@@ -163,6 +187,9 @@ teardown() {
 	grep 'ERROR' $LOG_FILE
 	grep 'Test log message' $LOG_FILE
 }
+
+# log_failed()
+# --------------------------------------------------------------#
 
 @test "log_failed() with no message" {
 	LOG_ENABLED=yes
@@ -181,6 +208,9 @@ teardown() {
 	grep 'Test log message' $LOG_FILE
 }
 
+# log_info()
+# --------------------------------------------------------------#
+
 @test "log_info() with no message" {
 	LOG_ENABLED=yes
 	log_info && [ "$?" -eq 0 ]
@@ -197,6 +227,9 @@ teardown() {
 	grep 'INFO' $LOG_FILE
 	grep 'Test log message' $LOG_FILE
 }
+
+# log_not_ok()
+# --------------------------------------------------------------#
 
 @test "log_not_ok() with no message" {
 	LOG_ENABLED=yes
@@ -215,6 +248,9 @@ teardown() {
 	grep 'Test log message' $LOG_FILE
 }
 
+# log_notice()
+# --------------------------------------------------------------#
+
 @test "log_notice() with no message" {
 	LOG_ENABLED=yes
 	log_notice && [ "$?" -eq 0 ]
@@ -231,6 +267,9 @@ teardown() {
 	grep 'NOTICE' $LOG_FILE
 	grep 'Test log message' $LOG_FILE
 }
+
+# log_ok()
+# --------------------------------------------------------------#
 
 @test "log_ok() with no message" {
 	LOG_ENABLED=yes
@@ -249,6 +288,9 @@ teardown() {
 	grep 'Test log message' $LOG_FILE
 }
 
+# log_passed()
+# --------------------------------------------------------------#
+
 @test "log_passed() with no message" {
 	LOG_ENABLED=yes
 	log_passed && [ "$?" -eq 0 ]
@@ -266,6 +308,9 @@ teardown() {
 	grep 'Test log message' $LOG_FILE
 }
 
+# log_success()
+# --------------------------------------------------------------#
+
 @test "log_success() with no message" {
 	LOG_ENABLED=yes
 	log_success && [ "$?" -eq 0 ]
@@ -282,6 +327,9 @@ teardown() {
 	grep 'SUCCESS' $LOG_FILE
 	grep 'Test log message' $LOG_FILE
 }
+
+# log_warning()
+# --------------------------------------------------------------#
 
 @test "log_warning() with no message" {
 	LOG_ENABLED=yes

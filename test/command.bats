@@ -2,6 +2,9 @@
 
 load ../lib/bsfl
 
+# cmd()
+# --------------------------------------------------------------#
+
 @test "cmd() with an existing command" {
 	run cmd 'ls'
 	[ "$status" -eq 0 ]

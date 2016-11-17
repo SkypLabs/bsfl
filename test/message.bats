@@ -2,6 +2,9 @@
 
 load ../lib/bsfl
 
+# msg()
+# --------------------------------------------------------------#
+
 @test "msg() with a simple message" {
 	run msg 'Test message'
 	[ "$status" -eq 0 ]
@@ -20,12 +23,18 @@ load ../lib/bsfl
 	[ "$output" = 'Test message' ]
 }
 
+# msg_status()
+# --------------------------------------------------------------#
+
 @test "msg_status() without a status argument" {
 	run msg_status 'Test message'
 	[ "$status" -eq 0 ]
 	$(echo $output | grep -q 'Test message')
 	$(echo $output | grep -q 'UNDEFINED')
 }
+
+# msg_alert()
+# --------------------------------------------------------------#
 
 @test "msg_alert() with no message" {
 	run msg_alert
@@ -41,6 +50,9 @@ load ../lib/bsfl
 	$(echo $output | grep -q 'ALERT')
 }
 
+# msg_critical()
+# --------------------------------------------------------------#
+
 @test "msg_critical() with no message" {
 	run msg_critical
 	[ "$status" -eq 0 ]
@@ -54,6 +66,9 @@ load ../lib/bsfl
 	$(echo $output | grep -q 'Test message')
 	$(echo $output | grep -q 'CRITICAL')
 }
+
+# msg_debug()
+# --------------------------------------------------------------#
 
 @test "msg_debug() with no message" {
 	run msg_debug
@@ -69,6 +84,9 @@ load ../lib/bsfl
 	$(echo $output | grep -q 'DEBUG')
 }
 
+# msg_emergency()
+# --------------------------------------------------------------#
+
 @test "msg_emergency() with no message" {
 	run msg_emergency
 	[ "$status" -eq 0 ]
@@ -82,6 +100,9 @@ load ../lib/bsfl
 	$(echo $output | grep -q 'Test message')
 	$(echo $output | grep -q 'EMERGENCY')
 }
+
+# msg_error()
+# --------------------------------------------------------------#
 
 @test "msg_error() with no message" {
 	run msg_error
@@ -97,6 +118,9 @@ load ../lib/bsfl
 	$(echo $output | grep -q 'ERROR')
 }
 
+# msg_failed()
+# --------------------------------------------------------------#
+
 @test "msg_failed() with no message" {
 	run msg_failed
 	[ "$status" -eq 0 ]
@@ -110,6 +134,9 @@ load ../lib/bsfl
 	$(echo $output | grep -q 'Test message')
 	$(echo $output | grep -q 'FAILED')
 }
+
+# msg_info()
+# --------------------------------------------------------------#
 
 @test "msg_info() with no message" {
 	run msg_info
@@ -125,6 +152,9 @@ load ../lib/bsfl
 	$(echo $output | grep -q 'INFO')
 }
 
+# msg_not_ok()
+# --------------------------------------------------------------#
+
 @test "msg_not_ok() with no message" {
 	run msg_not_ok
 	[ "$status" -eq 0 ]
@@ -138,6 +168,9 @@ load ../lib/bsfl
 	$(echo $output | grep -q 'Test message')
 	$(echo $output | grep -q 'NOT OK')
 }
+
+# msg_notice()
+# --------------------------------------------------------------#
 
 @test "msg_notice() with no message" {
 	run msg_notice
@@ -153,6 +186,9 @@ load ../lib/bsfl
 	$(echo $output | grep -q 'NOTICE')
 }
 
+# msg_ok()
+# --------------------------------------------------------------#
+
 @test "msg_ok() with no message" {
 	run msg_ok
 	[ "$status" -eq 0 ]
@@ -166,6 +202,9 @@ load ../lib/bsfl
 	$(echo $output | grep -q 'Test message')
 	$(echo $output | grep -q 'OK')
 }
+
+# msg_passed()
+# --------------------------------------------------------------#
 
 @test "msg_passed() with no message" {
 	run msg_passed
@@ -181,6 +220,9 @@ load ../lib/bsfl
 	$(echo $output | grep -q 'PASSED')
 }
 
+# msg_success()
+# --------------------------------------------------------------#
+
 @test "msg_success() with no message" {
 	run msg_success
 	[ "$status" -eq 0 ]
@@ -194,6 +236,9 @@ load ../lib/bsfl
 	$(echo $output | grep -q 'Test message')
 	$(echo $output | grep -q 'SUCCESS')
 }
+
+# msg_warning()
+# --------------------------------------------------------------#
 
 @test "msg_warning() with no message" {
 	run msg_warning

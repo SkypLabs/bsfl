@@ -2,6 +2,9 @@
 
 load ../lib/bsfl
 
+# elapsed()
+# --------------------------------------------------------------#
+
 @test "elapsed() with two empty values" {
 	run elapsed '' ''
 	[ "$status" -eq 0 ]
@@ -31,6 +34,9 @@ load ../lib/bsfl
 	[ "$status" -eq 0 ]
 	[ "$output" = '-5' ]
 }
+
+# start_watch() and stop_watch()
+# --------------------------------------------------------------#
 
 @test "start_watch() and stop_watch() with a 3s interval" {
 	start_watch

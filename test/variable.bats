@@ -2,6 +2,9 @@
 
 load ../lib/bsfl
 
+# defined()
+# --------------------------------------------------------------#
+
 @test "defined() with an existing variable" {
 	var=
 
@@ -24,6 +27,9 @@ load ../lib/bsfl
 	[ "$output" == "" ]
 }
 
+# has_value()
+# --------------------------------------------------------------#
+
 @test "has_value() with an existing variable" {
 	var=
 
@@ -45,6 +51,9 @@ load ../lib/bsfl
 	[ "$status" -eq 1 ]
 	[ "$output" == "" ]
 }
+
+# option_enabled()
+# --------------------------------------------------------------#
 
 @test "option_enabled() with an unknown variable" {
 	run option_enabled var

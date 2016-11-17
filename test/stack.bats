@@ -2,6 +2,9 @@
 
 load ../lib/bsfl
 
+# stack_pop()
+# --------------------------------------------------------------#
+
 @test "stack_pop with no item pushed" {
 	stack_pop && [ "$?" -eq 1 ]
 	[ "$REGISTER" = '' ]

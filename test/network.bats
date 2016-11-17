@@ -2,6 +2,9 @@
 
 load ../lib/bsfl
 
+# is_ipv4()
+# --------------------------------------------------------------#
+
 @test "is_ipv4() with an empty string" {
 	run is_ipv4 ''
 	[ "$status" -eq 1 ]
@@ -297,6 +300,9 @@ load ../lib/bsfl
 	[ "$status" -eq 0 ]
 }
 
+# is_ipv4_subnet()
+# --------------------------------------------------------------#
+
 @test "is_ipv4_subnet() with '192.168.1.0/24'" {
 	run is_ipv4_subnet 192.168.1.0/24
 	[ "$status" -eq 0 ]
@@ -412,6 +418,9 @@ load ../lib/bsfl
 	[ "$status" -eq 1 ]
 }
 
+# is_fqdn()
+# --------------------------------------------------------------#
+
 @test "is_fqdn() with 'www.google.com'" {
 	run is_fqdn www.google.com
 	[ "$status" -eq 0 ]
@@ -477,6 +486,9 @@ load ../lib/bsfl
 	[ "$status" -eq 1 ]
 }
 
+# mask2cidr()
+# --------------------------------------------------------------#
+
 @test "mask2cidr() with an empty string" {
 	run mask2cidr ''
 	[ "$status" -eq 1 ]
@@ -511,6 +523,9 @@ load ../lib/bsfl
 	[ "$status" -eq 1 ]
 	[ "$output" == '' ]
 }
+
+# cidr2mask()
+# --------------------------------------------------------------#
 
 @test "cidr2mask() with '0'" {
 	run cidr2mask 0

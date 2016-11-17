@@ -12,6 +12,9 @@ teardown() {
 	rm -rf test_dir
 }
 
+# file_exists()
+# --------------------------------------------------------------#
+
 @test "file_exists() on an existing file" {
 	file_exists test_file
 }
@@ -21,6 +24,9 @@ teardown() {
 	[ "$status" -eq 1 ]
 }
 
+# directory_exists()
+# --------------------------------------------------------------#
+
 @test "directory_exists() on an existing directory" {
 	directory_exists test_dir
 }
@@ -29,6 +35,9 @@ teardown() {
 	run directory_exists nonexistent_dir
 	[ "$status" -eq 1 ]
 }
+
+# device_exists()
+# --------------------------------------------------------------#
 
 @test "device_exists() on an existing device" {
 	if [ ! -b "/dev/sda" ]

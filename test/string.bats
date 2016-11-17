@@ -2,6 +2,9 @@
 
 load ../lib/bsfl
 
+# tolower()
+# --------------------------------------------------------------#
+
 @test "tolower() with an empty string" {
 	run tolower
 	[ "$status" -eq 0 ]
@@ -38,6 +41,9 @@ load ../lib/bsfl
 	[ "$output" == '@tolower!' ]
 }
 
+# toupper()
+# --------------------------------------------------------------#
+
 @test "toupper() with an empty string" {
 	run toupper
 	[ "$status" -eq 0 ]
@@ -73,6 +79,9 @@ load ../lib/bsfl
 	[ "$status" -eq 0 ]
 	[ "$output" == '@TOUPPER!' ]
 }
+
+# str_replace()
+# --------------------------------------------------------------#
 
 @test "str_replace() with an empty string" {
 	run str_replace r d
@@ -121,6 +130,9 @@ load ../lib/bsfl
 	[ "$status" -eq 0 ]
 	[ "$output" == 'etcd' ]
 }
+
+# trim()
+# --------------------------------------------------------------#
 
 @test "trim() with an empty string" {
 	run trim
