@@ -1196,8 +1196,9 @@ mask2cidr() {
 ## @fn cidr2mask()
 ## @ingroup network
 ## @brief Used to convert a netmask from CIDR representation to IPv4 representation.
-## @param netmask Netmask to convert.
-## @return IPv4 representation.
+## @param netmask CIDR netmask to convert.
+## @retval IPv4 netmask if the input is a valid CIDR netmask.
+## @retval 1 in others cases.
 cidr2mask() {
     is_ipv4_cidr $1 || return 1
 
