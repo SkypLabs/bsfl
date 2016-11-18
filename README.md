@@ -8,21 +8,21 @@ This project is a fork of the original work of Louwrentius.
 
 In order to use BSFL functions, you have to include the library in your bash scripts. You can do it with an absolute path :
 
-	source <absolute path to BSFL>
+    source <absolute path to BSFL>
 
 For example :
 
-	source /opt/bsfl/bsfl.sh
+    source /opt/bsfl/bsfl.sh
 
 Or with a relative path :
 
-	declare -r DIR=$(cd "$(dirname "$0")" && pwd)
-	source $DIR/<relative path to BSFL>
+    declare -r DIR=$(cd "$(dirname "$0")" && pwd)
+    source $DIR/<relative path to BSFL>
 
 For example :
 
-	declare -r DIR=$(cd "$(dirname "$0")" && pwd)
-	source $DIR/../lib/bsfl.sh
+    declare -r DIR=$(cd "$(dirname "$0")" && pwd)
+    source $DIR/../lib/bsfl.sh
 
 ## Dependencies
 
@@ -50,8 +50,8 @@ The documentation is available online [here][3].
 
 Building the documentation is done by using Doxygen :
 
-	cd <path to BSFL repository>/doc
-	doxygen Doxyfile
+    cd <path to BSFL repository>/doc
+    doxygen Doxyfile
 
 ## Get involved !
 
