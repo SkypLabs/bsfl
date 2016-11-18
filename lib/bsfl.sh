@@ -1225,6 +1225,8 @@ get_ipv4_broadcast() {
 ## @param netmask Netmask to convert.
 ## @return CIDR representation.
 mask2cidr() {
+    is_ipv4_netmask $1 || return 1
+
 	local x=${1##*255.}
 	set -- 0^^^128^192^224^240^248^252^254^ $(( (${#1} - ${#x})*2 )) ${x%%.*}
 	x=${1%%$3*}
