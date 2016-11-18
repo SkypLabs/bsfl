@@ -1120,6 +1120,39 @@ is_fqdn() {
 	return $?
 }
 
+## @fn is_ipv4_netmask()
+## @ingroup network
+## @brief Used to test if an IPv4 netmask is valid.
+## @param netmask IPv4 netmask to test.
+## @retval 0 if the IPv4 netmask is valid.
+## @retval 1 in others cases.
+is_ipv4_netmask() {
+    is_ipv4 $1 || return 1
+
+	IFS='.' read -r ipb[1] ipb[2] ipb[3] ipb[4] <<< "$1"
+    local -r list_msb='128 192 224 240 248 252 254'
+
+    for i in {1,2,3,4}
+    do
+        if [[ $rest_to_zero ]]
+        then
+            [[ ${ipb[i]} -eq 0 ]] || return 1
+        else
+            if [[ $list_msb =~ (^|[[:space:]])${ipb[i]}($|[[:space:]]) ]]
+            then
+                local -r rest_to_zero=1
+            elif [[ ${ipb[i]} -eq 255 || ${ipb[i]} -eq 0 ]]
+            then
+                continue
+            else
+                return 1
+            fi
+        fi
+    done
+
+    return 0
+}
+
 ## @fn is_ipv4_cidr()
 ## @ingroup network
 ## @brief Used to test an IPv4 CIDR netmask.

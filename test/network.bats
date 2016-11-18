@@ -368,6 +368,63 @@ load ../lib/bsfl
 	[ "$status" -eq 1 ]
 }
 
+# is_ipv4_netmask()
+# --------------------------------------------------------------#
+
+@test "is_ipv4_netmask() with an empty input" {
+	run is_ipv4_netmask
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
+
+@test "is_ipv4_netmask() with an empty string" {
+	run is_ipv4_netmask ''
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
+
+@test "is_ipv4_netmask() with 'test'" {
+	run is_ipv4_netmask test
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
+
+@test "is_ipv4_netmask() with '255'" {
+	run is_ipv4_netmask 255
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
+
+@test "is_ipv4_netmask() with '255.255'" {
+	run is_ipv4_netmask 255.255
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
+
+@test "is_ipv4_netmask() with '192.255.255.0'" {
+	run is_ipv4_netmask 192.255.255.0
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
+
+@test "is_ipv4_netmask() with '255.192.255.0'" {
+	run is_ipv4_netmask 255.192.255.0
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
+
+@test "is_ipv4_netmask() with '48.255.128.0'" {
+	run is_ipv4_netmask 48.255.128.0
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
+
+@test "is_ipv4_netmask() with '255.255.255.0'" {
+	run is_ipv4_netmask 255.255.255.0
+	[ "$status" -eq 0 ]
+	[ "$output" == '' ]
+}
+
 # is_ipv4_cidr()
 # --------------------------------------------------------------#
 
