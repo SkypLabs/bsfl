@@ -601,6 +601,57 @@ load ../lib/bsfl
 	[ "$status" -eq 1 ]
 }
 
+# get_ipv4_network()
+# --------------------------------------------------------------#
+
+@test "get_ipv4_network() with an empty input" {
+	run get_ipv4_network
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
+
+@test "get_ipv4_network() with an empty string" {
+	run get_ipv4_network ''
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
+
+@test "get_ipv4_network() with 'test'" {
+	run get_ipv4_network test
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
+
+@test "get_ipv4_network() with 'test test'" {
+	run get_ipv4_network test test
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
+
+@test "get_ipv4_network() with '192.168.1.1'" {
+	run get_ipv4_network 192.168.1.1
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
+
+@test "get_ipv4_network() with '192.168.1.1 192.255.255.0'" {
+	run get_ipv4_network 192.168.1.1 192.255.255.0
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
+
+@test "get_ipv4_network() with '423.168.1.1 255.255.255.0'" {
+	run get_ipv4_network 423.168.1.1 255.255.255.0
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
+
+@test "get_ipv4_network() with '192.168.1.1 255.255.255.0'" {
+	run get_ipv4_network 192.168.1.1 255.255.255.0
+	[ "$status" -eq 0 ]
+	[ "$output" == '192.168.1.0' ]
+}
+
 # mask2cidr()
 # --------------------------------------------------------------#
 
