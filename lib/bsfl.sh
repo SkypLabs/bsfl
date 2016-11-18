@@ -1130,7 +1130,8 @@ is_ipv4_netmask() {
     is_ipv4 $1 || return 1
 
 	IFS='.' read -r ipb[1] ipb[2] ipb[3] ipb[4] <<< "$1"
-    local -r list_msb='128 192 224 240 248 252 254'
+
+    local -r list_msb='0 128 192 224 240 248 252 254'
 
     for i in {1,2,3,4}
     do
@@ -1141,7 +1142,7 @@ is_ipv4_netmask() {
             if [[ $list_msb =~ (^|[[:space:]])${ipb[i]}($|[[:space:]]) ]]
             then
                 local -r rest_to_zero=1
-            elif [[ ${ipb[i]} -eq 255 || ${ipb[i]} -eq 0 ]]
+            elif [[ ${ipb[i]} -eq 255 ]]
             then
                 continue
             else

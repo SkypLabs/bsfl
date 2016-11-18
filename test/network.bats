@@ -419,8 +419,38 @@ load ../lib/bsfl
 	[ "$output" == '' ]
 }
 
+@test "is_ipv4_netmask() with '255.48.255.0'" {
+	run is_ipv4_netmask 255.48.255.0
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
+
+@test "is_ipv4_netmask() with '255.0.255.0'" {
+	run is_ipv4_netmask 255.0.255.0
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
+
+@test "is_ipv4_netmask() with '0.255.255.0'" {
+	run is_ipv4_netmask 0.255.255.0
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
+
 @test "is_ipv4_netmask() with '255.255.255.0'" {
 	run is_ipv4_netmask 255.255.255.0
+	[ "$status" -eq 0 ]
+	[ "$output" == '' ]
+}
+
+@test "is_ipv4_netmask() with '128.0.0.0'" {
+	run is_ipv4_netmask 128.0.0.0
+	[ "$status" -eq 0 ]
+	[ "$output" == '' ]
+}
+
+@test "is_ipv4_netmask() with '255.240.0.0'" {
+	run is_ipv4_netmask 255.240.0.0
 	[ "$status" -eq 0 ]
 	[ "$output" == '' ]
 }
