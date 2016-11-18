@@ -682,6 +682,57 @@ load ../lib/bsfl
 	[ "$output" == '192.168.1.0' ]
 }
 
+# get_ipv4_broadcast()
+# --------------------------------------------------------------#
+
+@test "get_ipv4_broadcast() with an empty input" {
+	run get_ipv4_broadcast
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
+
+@test "get_ipv4_broadcast() with an empty string" {
+	run get_ipv4_broadcast ''
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
+
+@test "get_ipv4_broadcast() with 'test'" {
+	run get_ipv4_broadcast test
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
+
+@test "get_ipv4_broadcast() with 'test test'" {
+	run get_ipv4_broadcast test test
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
+
+@test "get_ipv4_broadcast() with '192.168.1.1'" {
+	run get_ipv4_broadcast 192.168.1.1
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
+
+@test "get_ipv4_broadcast() with '192.168.1.1 192.255.255.0'" {
+	run get_ipv4_broadcast 192.168.1.1 192.255.255.0
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
+
+@test "get_ipv4_broadcast() with '423.168.1.1 255.255.255.0'" {
+	run get_ipv4_broadcast 423.168.1.1 255.255.255.0
+	[ "$status" -eq 1 ]
+	[ "$output" == '' ]
+}
+
+@test "get_ipv4_broadcast() with '192.168.1.1 255.255.255.0'" {
+	run get_ipv4_broadcast 192.168.1.1 255.255.255.0
+	[ "$status" -eq 0 ]
+	[ "$output" == '192.168.1.255' ]
+}
+
 # mask2cidr()
 # --------------------------------------------------------------#
 
