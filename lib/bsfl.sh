@@ -1188,7 +1188,8 @@ is_ipv4_subnet() {
 ## @brief Returns the IPv4 network
 ## @param address IPv4 address
 ## @param netmask IPv4 netmask
-## @return Network address
+## @retval Network address if the input is a valid IPv4 subnet.
+## @retval 1 in others cases.
 get_ipv4_network() {
     is_ipv4 $1 || return 1
     is_ipv4_netmask $2 || return 1
