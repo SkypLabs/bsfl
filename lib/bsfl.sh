@@ -1208,6 +1208,9 @@ get_ipv4_network() {
 ## @param netmask IPv4 netmask
 ## @return Broadcast address
 get_ipv4_broadcast() {
+    is_ipv4 $1 || return 1
+    is_ipv4_netmask $2 || return 1
+
 	IFS='.' read -r ipb1 ipb2 ipb3 ipb4 <<< "$1"
 	IFS='.' read -r mb1 mb2 mb3 mb4 <<< "$2"
 
