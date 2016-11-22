@@ -22,16 +22,16 @@ echo
 
 # --------------------
 
-msg "After using 'toupper' function :" "$BOLD"
+msg "After using 'to_upper' function :" "$BOLD"
 
-toupper $str
+to_upper $str
 echo
 
 # --------------------
 
-msg "After using 'tolower' function :" "$BOLD"
+msg "After using 'to_lower' function :" "$BOLD"
 
-tolower $str
+to_lower $str
 echo
 
 # --------------------

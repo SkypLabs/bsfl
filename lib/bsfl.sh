@@ -240,21 +240,21 @@ device_exists() {
 # Group: String
 # ----------------------------------------------------#
 
-## @fn tolower()
+## @fn to_lower()
 ## @ingroup string
 ## @brief Converts uppercase characters in a string to lowercase.
 ## @param string String to operate on.
 ## @return Lowercase string.
-tolower() {
+to_lower() {
     echo "$1" | tr '[:upper:]' '[:lower:]'
 }
 
-## @fn toupper()
+## @fn to_upper()
 ## @ingroup string
 ## @brief Converts lowercase characters in a string to uppercase.
 ## @param string String to operate on.
 ## @return Uppercase string.
-toupper() {
+to_upper() {
     echo "$1" | tr '[:lower:]' '[:upper:]'
 }
 

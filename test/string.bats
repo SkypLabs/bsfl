@@ -3,80 +3,80 @@
 
 load ../lib/bsfl
 
-# tolower()
+# to_lower()
 # --------------------------------------------------------------#
 
-@test "tolower() with an empty string" {
-    run tolower
+@test "to_lower() with an empty string" {
+    run to_lower
     [ "$status" -eq 0 ]
     [ "$output" == "" ]
 }
 
-@test "tolower() with 'ToLower'" {
-    run tolower ToLower
+@test "to_lower() with 'ToLower'" {
+    run to_lower ToLower
     [ "$status" -eq 0 ]
     [ "$output" == 'tolower' ]
 }
 
-@test "tolower() with 'TOLOWER'" {
-    run tolower TOLOWER
+@test "to_lower() with 'TOLOWER'" {
+    run to_lower TOLOWER
     [ "$status" -eq 0 ]
     [ "$output" == 'tolower' ]
 }
 
-@test "tolower() with 'tolower'" {
-    run tolower tolower
+@test "to_lower() with 'tolower'" {
+    run to_lower tolower
     [ "$status" -eq 0 ]
     [ "$output" == 'tolower' ]
 }
 
-@test "tolower() with 'Test String'" {
-    run tolower 'Test String'
+@test "to_lower() with 'Test String'" {
+    run to_lower 'Test String'
     [ "$status" -eq 0 ]
     [ "$output" == 'test string' ]
 }
 
-@test "tolower() with '@ToLower!'" {
-    run tolower '@ToLower!'
+@test "to_lower() with '@ToLower!'" {
+    run to_lower '@ToLower!'
     [ "$status" -eq 0 ]
     [ "$output" == '@tolower!' ]
 }
 
-# toupper()
+# to_upper()
 # --------------------------------------------------------------#
 
-@test "toupper() with an empty string" {
-    run toupper
+@test "to_upper() with an empty string" {
+    run to_upper
     [ "$status" -eq 0 ]
     [ "$output" == '' ]
 }
 
-@test "toupper() with 'ToUpper'" {
-    run toupper ToUpper
+@test "to_upper() with 'ToUpper'" {
+    run to_upper ToUpper
     [ "$status" -eq 0 ]
     [ "$output" == 'TOUPPER' ]
 }
 
-@test "toupper() with 'TOUPPER'" {
-    run toupper TOUPPER
+@test "to_upper() with 'TOUPPER'" {
+    run to_upper TOUPPER
     [ "$status" -eq 0 ]
     [ "$output" == 'TOUPPER' ]
 }
 
-@test "toupper() with 'toupper'" {
-    run toupper toupper
+@test "to_upper() with 'toupper'" {
+    run to_upper toupper
     [ "$status" -eq 0 ]
     [ "$output" == 'TOUPPER' ]
 }
 
-@test "toupper() with 'Test String'" {
-    run toupper 'Test String'
+@test "to_upper() with 'Test String'" {
+    run to_upper 'Test String'
     [ "$status" -eq 0 ]
     [ "$output" == 'TEST STRING' ]
 }
 
-@test "toupper() with '@ToUpper!'" {
-    run toupper '@ToUpper!'
+@test "to_upper() with '@ToUpper!'" {
+    run to_upper '@ToUpper!'
     [ "$status" -eq 0 ]
     [ "$output" == '@TOUPPER!' ]
 }
