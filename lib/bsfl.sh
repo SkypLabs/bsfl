@@ -1022,7 +1022,7 @@ str_replace_in_file() {
 __stack_push_tmp() {
     local TMP="$1"
 
-    if has_value __TMP_STACK
+    if has_value $__TMP_STACK
     then
         __TMP_STACK="$TMP"
     else
