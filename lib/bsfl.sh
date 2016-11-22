@@ -776,23 +776,6 @@ cmd() {
     return "$ERROR"
 }
 
-## @fn check_status()
-## @ingroup command
-## @brief Checks the command status and displays it.
-## @param command
-## @param status
-check_status() {
-    CMD="$1"
-    STATUS="$2"
-
-    if [ "$STATUS" == "0" ]
-    then
-        msg_ok "$CMD"
-    else
-        msg_failed "$CMD"
-    fi
-}
-
 # Group: Time
 # ----------------------------------------------------#
 
