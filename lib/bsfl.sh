@@ -740,7 +740,7 @@ display_status() {
 ## @brief Executes a command and displays its status ('OK' or 'FAILED').
 ## @param command Command to execute.
 cmd() {
-    COMMAND="$1"
+    COMMAND="$@"
     msg "Executing: $COMMAND"
 
     RESULT=$(eval $COMMAND 2>&1)
