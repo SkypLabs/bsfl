@@ -187,8 +187,7 @@ has_value() {
 option_enabled() {
     VAR="$1"
     VAR_VALUE=$(eval echo \$$VAR)
-    if [[ "$VAR_VALUE" == "y" ]] || [[ "$VAR_VALUE" == "yes" ]]
-    then
+    if [[ "$VAR_VALUE" == "y" ]] || [[ "$VAR_VALUE" == "yes" ]]; then
         return 0
     else
         return 1
@@ -275,8 +274,7 @@ trim() {
 ## @brief Logs a message using syslog.
 ## @param message Message to be logged.
 log2syslog() {
-    if option_enabled  SYSLOG_ENABLED
-    then
+    if option_enabled  SYSLOG_ENABLED; then
         MESSAGE="$1"
         logger -t "$SYSLOG_TAG" " $MESSAGE" # The space is not a typo!
     fi
@@ -288,26 +286,22 @@ log2syslog() {
 ## @param message Message to be logged.
 ## @param status Message status.
 log() {
-    if option_enabled LOG_ENABLED || option_enabled SYSLOG_ENABLED
-    then
+    if option_enabled LOG_ENABLED || option_enabled SYSLOG_ENABLED; then
         LOG_MESSAGE="$1"
         STATE="$2"
         DATE=`date +"$LOGDATEFORMAT"`
 
-        if has_value LOG_MESSAGE
-        then
+        if has_value LOG_MESSAGE; then
             LOG_STRING="$DATE $STATE - $LOG_MESSAGE"
         else
             LOG_STRING="$DATE -- empty log message, no input received --"
         fi
 
-        if option_enabled LOG_ENABLED
-        then
+        if option_enabled LOG_ENABLED; then
             echo "$LOG_STRING" >> "$LOG_FILE"
         fi
 
-        if option_enabled SYSLOG_ENABLED
-        then
+        if option_enabled SYSLOG_ENABLED; then
             # Syslog already prepends a date/time stamp so only the message
             # is logged.
             log2syslog "$LOG_MESSAGE"
@@ -322,8 +316,7 @@ log() {
 ## @param message Message to be logged.
 ## @param status Message status.
 log_status() {
-    if option_enabled LOG_ENABLED
-    then
+    if option_enabled LOG_ENABLED; then
         MESSAGE="$1"
         STATUS="$2"
 
@@ -475,24 +468,20 @@ msg() {
     MESSAGE="$1"
     COLOR="$2"
 
-    if ! has_value COLOR
-    then
+    if ! has_value COLOR; then
         COLOR="$DEFAULT"
     fi
 
-    if has_value "MESSAGE"
-    then
+    if has_value "MESSAGE"; then
         $COLOR
         echo "$MESSAGE"
         $DEFAULT
-        if ! option_enabled "DONOTLOG"
-        then
+        if ! option_enabled "DONOTLOG"; then
             log "$MESSAGE"
         fi
     else
         echo "-- no message received --"
-        if ! option_enabled "DONOTLOG"
-        then
+        if ! option_enabled "DONOTLOG"; then
             log "$MESSAGE"
         fi
     fi
@@ -761,11 +750,9 @@ cmd() {
 
     tput cuu1
 
-    if [ "$ERROR" == "0" ]
-    then
+    if [ "$ERROR" == "0" ]; then
         msg_ok "$MSG"
-        if option_enabled DEBUG
-        then
+        if option_enabled DEBUG; then
             msg "$RESULT"
         fi
     else
@@ -816,8 +803,7 @@ start_watch() {
 ## @retval 1 if the watch has not been started.
 ## @return Time elapsed since the watch has been started.
 stop_watch() {
-    if has_value __START_WATCH
-    then
+    if has_value __START_WATCH; then
         STOP_WATCH=`now`
         elapsed "$__START_WATCH" "$STOP_WATCH"
         return 0
@@ -858,8 +844,7 @@ die_if_false() {
     local -r err_msg=$2
     local -r err_caller=$(caller 0)
 
-    if [[ "$err_code" != "0" ]]
-    then
+    if [[ "$err_code" != "0" ]]; then
         die $err_code "$err_msg" "$err_caller"
     fi
 } >&2 # function writes to stderr
@@ -875,8 +860,7 @@ die_if_true() {
     local -r err_msg=$2
     local -r err_caller=$(caller 0)
 
-    if [[ "$err_code" == "0" ]]
-    then
+    if [[ "$err_code" == "0" ]]; then
         die $err_code "$err_msg" "$err_caller"
     fi
 } >&2 # function writes to stderr
@@ -1001,8 +985,7 @@ str_replace_in_file() {
     local ORIG="$1"
     local DEST="$2"
 
-    for FILE in ${@:3:$#}
-    do
+    for FILE in ${@:3:$#}; do
         file_exists "$FILE" || return 1
 
         printf ",s/$ORIG/$DEST/g\nw\nQ" | ed -s "$FILE" > /dev/null 2>&1 || return "$?"
@@ -1022,8 +1005,7 @@ str_replace_in_file() {
 __stack_push_tmp() {
     local TMP="$1"
 
-    if has_value $__TMP_STACK
-    then
+    if has_value $__TMP_STACK; then
         __TMP_STACK="$TMP"
     else
         __TMP_STACK="$__TMP_STACK"$'\n'"$TMP"
@@ -1037,8 +1019,7 @@ __stack_push_tmp() {
 stack_push() {
     line="$1"
 
-    if has_value $__STACK
-    then
+    if has_value $__STACK; then
         __STACK="$line"
     else
         __STACK="$line"$'\n'"$__STACK"
@@ -1055,10 +1036,8 @@ stack_pop() {
     __TMP_STACK=""
     i=0
     tmp=""
-    for x in $__STACK
-    do
-        if [ "$i" == "0" ]
-        then
+    for x in $__STACK; do
+        if [ "$i" == "0" ]; then
             tmp="$x"
         else
             __stack_push_tmp "$x"
@@ -1067,8 +1046,7 @@ stack_pop() {
     done
     __STACK="$__TMP_STACK"
     REGISTER="$tmp"
-    if [ -z "$REGISTER" ]
-    then
+    if [ -z "$REGISTER" ]; then
         return 1
     else
         return 0
@@ -1116,17 +1094,13 @@ is_ipv4_netmask() {
 
     local -r list_msb='0 128 192 224 240 248 252 254'
 
-    for i in {1,2,3,4}
-    do
-        if [[ $rest_to_zero ]]
-        then
+    for i in {1,2,3,4}; do
+        if [[ $rest_to_zero ]]; then
             [[ ${ipb[i]} -eq 0 ]] || return 1
         else
-            if [[ $list_msb =~ (^|[[:space:]])${ipb[i]}($|[[:space:]]) ]]
-            then
+            if [[ $list_msb =~ (^|[[:space:]])${ipb[i]}($|[[:space:]]) ]]; then
                 local -r rest_to_zero=1
-            elif [[ ${ipb[i]} -eq 255 ]]
-            then
+            elif [[ ${ipb[i]} -eq 255 ]]; then
                 continue
             else
                 return 1
@@ -1238,13 +1212,10 @@ cidr2mask() {
     local full_octets=$(($1/8))
     local partial_octet=$(($1%8))
 
-    for ((i=0;i<4;i+=1))
-    do
-        if [ $i -lt $full_octets ]
-        then
+    for ((i=0;i<4;i+=1)); do
+        if [ $i -lt $full_octets ]; then
             mask+=255
-        elif [ $i -eq $full_octets ]
-        then
+        elif [ $i -eq $full_octets ]; then
             mask+=$((256 - 2**(8-$partial_octet)))
         else
             mask+=0
