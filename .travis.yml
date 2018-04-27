@@ -12,17 +12,17 @@ before_script:
   - tar -xvf /tmp/bats.tar.gz -C /tmp
   - sudo /tmp/bats-0.4.0/install.sh /usr/local
 
-script: bats test/
-
 jobs:
   include:
+    - stage: Test
+      script: bats test/
     - stage: Documentation
       script: cd doc && doxygen Doxyfile
       deploy:
         provider: pages
         github-token:
           secure: "YRuWwhnK0baQtRI5f+Hu68jtU9rwgMEPUjMs8PA2fvSZz4dd4kM3Z8jK2iiVfiQ4SUCg9HLtm9h6PGiibIcDYWtQN1e+9kSEJMnpf3oxPlPRAVuyCY/mRzdPUsA0mD9tKh9nTlPjvuVr89yKFLnNHrOmqjBbTEsZ6FMp58FlG9gMCZ06ehDX6FkL7H1m6SSSJkMZDBx00xQSatLBIaHsaTTSttvyhw6r2HZvaiYAOjW5WtgG8phqrrq/Hjfd12+vF1p8/A3iUa0Nkyqbc6SwIHuId1IWcP/esUdhMAlOWUxdekajoLzDYP1YoJbfmFbB6l6/vzsRhzqNDudx4PlkUp7/Z/PG1ob/ijhadkGMTrYOYFOHDdyriZY04t+zj2q6kINuis+nT1k9j2tO/7P2E4R928saoCFiJbydCjdxuTbFXdkzPI23QlIE5avzH9Z5yPu48clcFcZSJjuBP3EaByJ7uQLSgeHIZrd/uRH4xNfyJ9IbLmBio4dNCqca/isZ9GFt+Y0lK9U/OxcSwMfiGpZKeO5IPp8QurKUsgwMPSYiyx8l4FteY4x4V5Hpt3kp1R/i8VPfEg601sv+/7WQJSAvWt4GpoCm73t6Vda7HfAy253walYiioK+aL7QNpaXw3Un37RUQFooIK57VjLGkZzh9FqFc1PdbLop00984Yk="
-        local-dir: html
+        local-dir: doc/html
         skip-cleanup: true
         on:
           branch: master
