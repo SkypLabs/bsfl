@@ -1,11 +1,28 @@
-language: bash
-
 sudo: true
 
-before_script:
-    - wget https://github.com/sstephenson/bats/archive/v0.4.0.tar.gz -O /tmp/bats.tar.gz
-    - tar -xvf /tmp/bats.tar.gz -C /tmp
-    - sudo /tmp/bats-0.4.0/install.sh /usr/local
+language: bash
 
-script:
-    - bats test/
+addons:
+  apt:
+    packages:
+      - doxygen
+
+before_script:
+  - wget https://github.com/sstephenson/bats/archive/v0.4.0.tar.gz -O /tmp/bats.tar.gz
+  - tar -xvf /tmp/bats.tar.gz -C /tmp
+  - sudo /tmp/bats-0.4.0/install.sh /usr/local
+
+script: bats test/
+
+jobs:
+  include:
+    - stage: Documentation
+      script: cd doc && doxygen Doxyfile
+      deploy:
+        provider: pages
+        github-token: $GITHUB_TOKEN
+        local-dir: html
+        skip-cleanup: true
+        on:
+          branch: master
+          repo: SkypLabs/bsfl
