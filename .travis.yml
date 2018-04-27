@@ -26,4 +26,5 @@ jobs:
         skip-cleanup: true
         on:
           branch: master
+          tags: true
           repo: SkypLabs/bsfl
