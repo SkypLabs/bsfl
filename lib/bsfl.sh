@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 # -*- tab-width: 4; encoding: utf-8 -*-
 
+## \mainpage
+## \section Introduction
+## The Bash Shell Function Library (BSFL) is a small Bash script that acts as a library
+## for bash scripts. It provides a couple of functions that makes the lives of most
+## people using shell scripts a bit easier.
+
 ## @file
 ## @author Louwrentius <louwrentius@gmail.com>
 ## @author Paul-Emmanuel Raoul <skyper@skyplabs.net>
