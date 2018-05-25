@@ -6,14 +6,14 @@ source $DIR/../lib/bsfl.sh
 
 # --------------------
 
-msg "We use the 'defined' function to test if the variable 'var' is defined :" "$BOLD"
+msg "We use the 'defined' function to test if the variable 'var' is defined:" "$BOLD"
 
 cmd defined var
 echo
 
 # --------------------
 
-msg "Now with the variable 'var' defined :" "$BOLD"
+msg "Now with the variable 'var' defined:" "$BOLD"
 
 var='test'
 cmd defined var
@@ -21,13 +21,13 @@ echo
 
 # --------------------
 
-msg "The 'has_value' function returns true if the variable given as parameter has a value :" "$BOLD"
+msg "The 'has_value' function returns true if the variable given as parameter has a value:" "$BOLD"
 
 cmd has_value var
 echo
 
 # --------------------
 
-msg "The 'option_enabled' function allows to test if a variable is set to 'y' or 'yes' :" "$BOLD"
+msg "The 'option_enabled' function allows to test if a variable is set to 'y' or 'yes':" "$BOLD"
 
 cmd option_enabled var

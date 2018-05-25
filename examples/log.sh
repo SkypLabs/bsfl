@@ -13,7 +13,7 @@ echo
 
 # --------------------
 
-msg "Thus, this message is logged in a file as you can see :." "$BOLD"
+msg "Thus, this message is logged in a file as you can see:" "$BOLD"
 
 DEBUG=y
 cmd "cat $LOG_FILE"
@@ -33,58 +33,58 @@ echo
 
 # --------------------
 
-log_alert "This is a logged message using 'log_alert' function."
+log_alert "This is a logged message using the 'log_alert' function."
 
 # --------------------
 
-log_critical "This is a logged message using 'log_critical' function."
+log_critical "This is a logged message using the 'log_critical' function."
 
 # --------------------
 
-log_debug "This is a logged message using 'log_debug' function."
+log_debug "This is a logged message using the 'log_debug' function."
 
 # --------------------
 
-log_emergency "This is a logged message using 'log_emergency' function."
+log_emergency "This is a logged message using the 'log_emergency' function."
 
 # --------------------
 
-log_error "This is a logged message using 'log_error' function."
+log_error "This is a logged message using the 'log_error' function."
 
 # --------------------
 
-log_failed "This is a logged message using 'log_failed' function."
+log_failed "This is a logged message using the 'log_failed' function."
 
 # --------------------
 
-log_info "This is a logged message using 'log_info' function."
+log_info "This is a logged message using the 'log_info' function."
 
 # --------------------
 
-log_not_ok "This is a logged message using 'log_not_ok' function."
+log_not_ok "This is a logged message using the 'log_not_ok' function."
 
 # --------------------
 
-log_notice "This is a logged message using 'log_notice' function."
+log_notice "This is a logged message using the 'log_notice' function."
 
 # --------------------
 
-log_ok "This is a logged message using 'log_ok' function."
+log_ok "This is a logged message using the 'log_ok' function."
 
 # --------------------
 
-log_passed "This is a logged message using 'log_passed' function."
+log_passed "This is a logged message using the 'log_passed' function."
 
 # --------------------
 
-log_success "This is a logged message using 'log_success' function."
+log_success "This is a logged message using the 'log_success' function."
 
 # --------------------
 
-log_warning "This is a logged message using 'log_warning' function."
+log_warning "This is a logged message using the 'log_warning' function."
 
 # --------------------
 
-msg "A variety of functions can be used to log messages with different status :" "$BOLD"
+msg "A variety of functions can be used to log messages with different status:" "$BOLD"
 
 cmd "cat $LOG_FILE"

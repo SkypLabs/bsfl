@@ -6,7 +6,7 @@ source $DIR/../lib/bsfl.sh
 
 # --------------------
 
-msg "We use the 'cmd' function to execute a command and to display its status :" "$BOLD"
+msg "We use the 'cmd' function to execute a command and to display its status:" "$BOLD"
 
 cmd "ls -al"
 echo
@@ -16,7 +16,7 @@ echo
 
 # --------------------
 
-msg "As you can see, the command's result is not displayed. If you want to, you have to enable the debug mode using 'DEBUG' variable :" "$BOLD"
+msg "As you can see, the command's result is not displayed. If you want to, you have to enable the debug mode using the 'DEBUG' variable:" "$BOLD"
 
 DEBUG=y
 cmd "ls -al"
