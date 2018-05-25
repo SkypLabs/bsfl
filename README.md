@@ -6,6 +6,8 @@ The Bash Shell Function Library (BSFL) is a small bash script that acts as a lib
 
 This project is a fork of the original work of Louwrentius.
 
+[![asciicast](https://asciinema.org/a/183624.png)](https://asciinema.org/a/183624)
+
 ## Getting started
 
 In order to use BSFL, you have to include the library in your bash scripts. You can do it with an absolute path:
