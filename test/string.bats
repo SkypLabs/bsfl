@@ -96,7 +96,7 @@ load ../lib/bsfl
     [ "$output" == 'etc' ]
 }
 
-@test "str_replace() with a letter to replace" {
+@test "str_replace() with one letter to replace" {
     run str_replace r d etcr
     [ "$status" -eq 0 ]
     [ "$output" == 'etcd' ]
@@ -120,13 +120,13 @@ load ../lib/bsfl
     [ "$output" == 'etcd etcd' ]
 }
 
-@test "str_replace() with an upper case letter to replace" {
+@test "str_replace() with one upper case letter to replace" {
     run str_replace R D etcR
     [ "$status" -eq 0 ]
     [ "$output" == 'etcD' ]
 }
 
-@test "str_replace() with no letter to replace and the final letter presents in the input string" {
+@test "str_replace() with no letter to replace and the final letter present in the input string" {
     run str_replace r d etcd
     [ "$status" -eq 0 ]
     [ "$output" == 'etcd' ]
