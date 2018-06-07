@@ -154,7 +154,7 @@
 
 # Delete non doxygen-related lines content, but not the line
 # themselves.
-/^## \|^##$/!{
+/^\(\s*\)## \|^\1##$/!{
      s/^.*$//p
 }
 b end
@@ -166,4 +166,4 @@ b declareprint
 
 :end
 # Make all ## lines doxygen-able.
-s/^##\( \|$\)/\/\/!\1/p
+s/^\s*##\( \|$\)/\/\/!\1/p
