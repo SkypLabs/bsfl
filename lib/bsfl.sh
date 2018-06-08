@@ -777,7 +777,7 @@ cmd() {
 ## @brief Displays the current timestamp.
 ## @return Current timestamp.
 now() {
-    echo "$(date +%s)"
+    date +%s
 }
 
 ## @fn elapsed()
@@ -880,6 +880,7 @@ die_if_true() {
 ## @private
 ## @param array Array name.
 ## @param item Item to append.
+# shellcheck disable=SC2016
 __array_append() {
     echo -n 'eval '
     echo -n "$1" # array name
@@ -910,6 +911,7 @@ __array_append_first() {
 ## @private
 ## @param variable Variable name.
 ## @param array Array name.
+# shellcheck disable=SC2016
 __array_len() {
     echo -n 'eval local '
     echo -n "$1" # variable name
@@ -925,6 +927,7 @@ __array_len() {
 ## @param array Array to operate on.
 array_append() {
     local array=$1; shift 1
+    local len
 
     $(__array_len len "$array")
 
@@ -945,6 +948,8 @@ array_append() {
 ## @param array Array to operate on.
 ## @return Size of the array given as parameter.
 array_size() {
+    local size
+
     $(__array_len size "$1")
     echo "$size"
 }
