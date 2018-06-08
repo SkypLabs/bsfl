@@ -39,6 +39,7 @@ The online documentation is available [here][bsfl doc].
 Building the documentation is done by using [Doxygen][doxygen]:
 
     cd <BSFL repository>/doc
+    git submodule update --init --recursive
     doxygen Doxyfile
 
 ## Dependencies
@@ -51,7 +52,6 @@ In addition, BSFL depends of some external programs. Here is the list of these p
 * grep
 * logger
 * printf
-* sed
 * tput
 * tr
 
