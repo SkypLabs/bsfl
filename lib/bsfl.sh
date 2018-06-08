@@ -269,7 +269,7 @@ to_upper() {
 ## @param string String to operate on.
 ## @return The string stripped of whitespace from both ends.
 trim() {
-    echo $1
+    echo "${1//'[[:space:]]'/}"
 }
 
 # Group: Log
