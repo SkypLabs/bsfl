@@ -28,107 +28,107 @@
 
 ## @var BSFL_VERSION
 ## @brief BSFL version number.
-declare -r BSFL_VERSION="0.1.0"
+declare -rx BSFL_VERSION="0.1.0"
 
 ## @var DEBUG
 ## @brief Enables / disables the debug mode.
 ## @details The debug mode adds extra information for troubleshooting purposes.
 ## Value: yes or no (y / n).
-declare DEBUG="no"
+declare -x DEBUG="no"
 
 ## @var LOGDATEFORMAT
 ## @brief Sets the log data format (syslog style).
-declare LOGDATEFORMAT="%FT%T%z"
+declare -x LOGDATEFORMAT="%FT%T%z"
 
 ## @var LOG_FILE
 ## @brief Sets the log file to use when the logs are enabled.
-declare LOG_FILE="$0.log"
+declare -x LOG_FILE="$0.log"
 
 ## @var LOG_ENABLED
 ## @brief Enables / disables logging in a file.
 ## @details Value: yes or no (y / n).
-declare LOG_ENABLED="no"
+declare -x LOG_ENABLED="no"
 
 ## @var SYSLOG_ENABLED
 ## @brief Enables / disables logging to syslog.
 ## @details Value: yes or no (y / n).
-declare SYSLOG_ENABLED="no"
+declare -x SYSLOG_ENABLED="no"
 
 ## @var SYSLOG_TAG
 ## @brief Tag to use with syslog.
 ## @details Value: yes or no (y / n).
-declare SYSLOG_TAG="$0"
+declare -x SYSLOG_TAG="$0"
 
 ## @var __START_WATCH
 ## @brief Internal use.
 ## @private
-declare __START_WATCH=""
+declare -x __START_WATCH=""
 
 ## @var __STACK
 ## @brief Internal use.
 ## @private
-declare __STACK
+declare -x __STACK
 
 ## @var __TMP_STACK
 ## @brief Internal use.
 ## @private
-declare __TMP_STACK
+declare -x __TMP_STACK
 
 ## @var RED
 ## @brief Internal color.
-declare -r RED="tput setaf 1"
+declare -rx RED="tput setaf 1"
 
 ## @var GREEN
 ## @brief Internal color.
-declare -r GREEN="tput setaf 2"
+declare -rx GREEN="tput setaf 2"
 
 ## @var YELLOW
 ## @brief Internal color.
-declare -r YELLOW="tput setaf 3"
+declare -rx YELLOW="tput setaf 3"
 
 ## @var BLUE
 ## @brief Internal color.
-declare -r BLUE="tput setaf 4"
+declare -rx BLUE="tput setaf 4"
 
 ## @var MAGENTA
 ## @brief Internal color.
-declare -r MAGENTA="tput setaf 5"
+declare -rx MAGENTA="tput setaf 5"
 
 ## @var CYAN
 ## @brief Internal color.
-declare -r CYAN="tput setaf 6"
+declare -rx CYAN="tput setaf 6"
 
 ## @var BOLD
 ## @brief Internal color.
-declare -r BOLD="tput bold"
+declare -rx BOLD="tput bold"
 
 ## @var DEFAULT
 ## @brief Internal color.
-declare -r DEFAULT="tput sgr0"
+declare -rx DEFAULT="tput sgr0"
 
 ## @var RED_BG
 ## @brief Internal color.
-declare -r RED_BG="tput setab 1"
+declare -rx RED_BG="tput setab 1"
 
 ## @var GREEN_BG
 ## @brief Internal color.
-declare -r GREEN_BG="tput setab 2"
+declare -rx GREEN_BG="tput setab 2"
 
 ## @var YELLOW_BG
 ## @brief Internal color.
-declare -r YELLOW_BG="tput setab 3"
+declare -rx YELLOW_BG="tput setab 3"
 
 ## @var BLUE_BG
 ## @brief Internal color.
-declare -r BLUE_BG="tput setab 4"
+declare -rx BLUE_BG="tput setab 4"
 
 ## @var MAGENTA_BG
 ## @brief Internal color.
-declare -r MAGENTA_BG="tput setab 5"
+declare -rx MAGENTA_BG="tput setab 5"
 
 ## @var CYAN_BG
 ## @brief Internal color.
-declare -r CYAN_BG="tput setab 6"
+declare -rx CYAN_BG="tput setab 6"
 
 # Configuration
 # --------------------------------------------------------------#
