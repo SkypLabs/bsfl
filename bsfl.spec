@@ -31,5 +31,8 @@ rm -rf %{buildroot}
 /opt/bsfl/bsfl.sh
 
 %changelog
+* Sat Sep 15 2018 Christopher Miersma <ccmiersma@gmail.com> 0.1.0-1
+- new package built with tito
+
 * Thu Nov 13 2014 - skyper@skyplabs.net
 - bsfl initial package definition.
