@@ -1,7 +1,7 @@
 Name:		bsfl
 Summary:	Bash Shell Function Library
 
-Release:	1%{?rev}%{?dist}
+Release:	2%{?rev}%{?dist}
 Version:	0.1.0
 BuildArch:	noarch
 
@@ -31,7 +31,7 @@ rm -rf %{buildroot}
 /opt/bsfl/*
 
 %changelog
-* Sat Sep 15 2018 Christopher Miersma <ccmiersma@gmail.com> 0.1.0-1
+* Sat Sep 15 2018 Christopher Miersma <ccmiersma@gmail.com> 0.1.0-2
 - new package built with tito
 
 * Thu Nov 13 2014 - skyper@skyplabs.net
