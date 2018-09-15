@@ -20,15 +20,15 @@ The Bash Shell Function Library (BSFL) is a small Bash script that acts as a lib
 %autosetup -n %{name}-%{version}
 
 %install
-mkdir -p $RPM_BUILD_ROOT/opt/bsfl
-cp %{_builddir}/%{name}-%{version}/lib/* $RPM_BUILD_ROOT/opt/bsfl
+install -D -t $RPM_BUILD_ROOT/opt/bsfl lib/bsfl.sh
+ln -rs -T $RPM_BUILD_ROOT/opt/bsfl/bsfl.sh $RPM_BUILD_ROOT/opt/bsfl/bsfl.bash
 
 %clean
 rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-/opt/bsfl/bsfl.sh
+/opt/bsfl/*
 
 %changelog
 * Sat Sep 15 2018 Christopher Miersma <ccmiersma@gmail.com> 0.1.0-1
