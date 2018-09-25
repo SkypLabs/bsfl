@@ -266,10 +266,11 @@ to_upper() {
 ## @fn trim()
 ## @ingroup string
 ## @brief Removes whitespace from both ends of a string.
+## @see <a href="https://unix.stackexchange.com/a/102021">Linux Stack Exchange</a>
 ## @param string String to operate on.
 ## @return The string stripped of whitespace from both ends.
 trim() {
-    echo "${1//'[[:space:]]'/}"
+    echo "${1}" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'
 }
 
 # Group: Log
