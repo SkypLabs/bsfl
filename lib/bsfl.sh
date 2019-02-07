@@ -655,7 +655,7 @@ __raw_status() {
     COLOR="$2"
 
     position_cursor () {
-        let RES_COL=$(tput cols)-12
+        ((RES_COL=$(tput cols)-12))
         tput cuf $RES_COL
         tput cuu1
     }
@@ -926,6 +926,7 @@ __array_len() {
 ## @brief Appends one or more items to an array.
 ## @details If the array does not exist, this function will create it.
 ## @param array Array to operate on.
+# shellcheck disable=SC2091
 array_append() {
     local array=$1; shift 1
     local len
@@ -948,6 +949,7 @@ array_append() {
 ## @brief Returns the size of an array.
 ## @param array Array to operate on.
 ## @return Size of the array given as parameter.
+# shellcheck disable=SC2091
 array_size() {
     local size
 
@@ -1099,6 +1101,7 @@ is_fqdn() {
 ## @param netmask IPv4 decimal netmask to test.
 ## @retval 0 if the IPv4 decimal netmask is valid.
 ## @retval 1 in others cases.
+# shellcheck disable=SC2154
 is_ipv4_netmask() {
     is_ipv4 "$1" || return 1
 
