@@ -174,12 +174,7 @@ defined() {
 ## @retval 0 if the variable is defined and if value's length > 0.
 ## @retval 1 in others cases.
 has_value() {
-    if defined $1; then
-        if [[ -n ${!1} ]]; then
-            return 0
-        fi
-    fi
-    return 1
+    defined "$1" && [[ -n ${!1} ]]
 }
 
 ## @fn option_enabled()
@@ -655,7 +650,7 @@ __raw_status() {
     COLOR="$2"
 
     position_cursor () {
-        let RES_COL=$(tput cols)-12
+        ((RES_COL=$(tput cols)-12))
         tput cuf $RES_COL
         tput cuu1
     }
@@ -926,6 +921,7 @@ __array_len() {
 ## @brief Appends one or more items to an array.
 ## @details If the array does not exist, this function will create it.
 ## @param array Array to operate on.
+# shellcheck disable=SC2091
 array_append() {
     local array=$1; shift 1
     local len
@@ -948,6 +944,7 @@ array_append() {
 ## @brief Returns the size of an array.
 ## @param array Array to operate on.
 ## @return Size of the array given as parameter.
+# shellcheck disable=SC2091
 array_size() {
     local size
 
@@ -1000,7 +997,7 @@ str_replace_in_file() {
     for FILE in "${@:3:$#}"; do
         file_exists "$FILE" || return 1
 
-        printf ",s/$ORIG/$DEST/g\nw\nQ" | ed -s "$FILE" > /dev/null 2>&1 || return "$?"
+        printf ',s/%s/%s/g\nw\nQ' "${ORIG}" "${DEST}" | ed -s "$FILE" > /dev/null 2>&1 || return "$?"
     done
 
     return 0
@@ -1099,6 +1096,7 @@ is_fqdn() {
 ## @param netmask IPv4 decimal netmask to test.
 ## @retval 0 if the IPv4 decimal netmask is valid.
 ## @retval 1 in others cases.
+# shellcheck disable=SC2154
 is_ipv4_netmask() {
     is_ipv4 "$1" || return 1
 
