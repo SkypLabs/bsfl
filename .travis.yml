@@ -14,6 +14,8 @@ before_script:
 
 jobs:
   include:
+    - stage: ShellCheck
+      script: shellcheck lib/bsfl.sh
     - stage: Test
       script: bats test/
     - stage: Documentation
