@@ -1002,7 +1002,7 @@ str_replace_in_file() {
     for FILE in "${@:3:$#}"; do
         file_exists "$FILE" || return 1
 
-        printf ",s/$ORIG/$DEST/g\nw\nQ" | ed -s "$FILE" > /dev/null 2>&1 || return "$?"
+        printf ',s/%s/%s/g\nw\nQ' "${ORIG}" "${DEST}" | ed -s "$FILE" > /dev/null 2>&1 || return "$?"
     done
 
     return 0
