@@ -174,12 +174,7 @@ defined() {
 ## @retval 0 if the variable is defined and if value's length > 0.
 ## @retval 1 in others cases.
 has_value() {
-    if defined $1; then
-        if [[ -n ${!1} ]]; then
-            return 0
-        fi
-    fi
-    return 1
+    defined "$1" && [[ -n ${!1} ]]
 }
 
 ## @fn option_enabled()
