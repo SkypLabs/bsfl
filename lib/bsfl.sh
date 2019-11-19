@@ -1014,7 +1014,7 @@ str_replace_in_file() {
 __stack_push_tmp() {
     local TMP="$1"
 
-    if has_value "$__TMP_STACK"; then
+    if has_value __TMP_STACK; then
         __TMP_STACK="$TMP"
     else
         __TMP_STACK="$__TMP_STACK"$'\n'"$TMP"
@@ -1028,7 +1028,7 @@ __stack_push_tmp() {
 stack_push() {
     line="$1"
 
-    if has_value "$__STACK"; then
+    if has_value __STACK; then
         __STACK="$line"
     else
         __STACK="$line"$'\n'"$__STACK"
