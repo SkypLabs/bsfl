@@ -1015,9 +1015,9 @@ __stack_push_tmp() {
     local TMP="$1"
 
     if has_value __TMP_STACK; then
-        __TMP_STACK="$TMP"
+        __TMP_STACK="${__TMP_STACK}"$'\n'"${TMP}"
     else
-        __TMP_STACK="$__TMP_STACK"$'\n'"$TMP"
+        __TMP_STACK="$TMP"
     fi
 }
 
@@ -1029,9 +1029,9 @@ stack_push() {
     line="$1"
 
     if has_value __STACK; then
-        __STACK="$line"
+        __STACK="${line}"$'\n'"${__STACK}"
     else
-        __STACK="$line"$'\n'"$__STACK"
+        __STACK="$line"
     fi
 }
 
