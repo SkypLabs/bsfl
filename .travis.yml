@@ -5,10 +5,22 @@ addons:
     packages:
       - doxygen
 
-before_script:
-  - wget https://github.com/sstephenson/bats/archive/v0.4.0.tar.gz -O /tmp/bats.tar.gz
-  - tar -xvf /tmp/bats.tar.gz -C /tmp
-  - sudo /tmp/bats-0.4.0/install.sh /usr/local
+env:
+  global:
+  - export PATH="/usr/local/bin:$PATH"
+
+before_install:
+- |
+  if [ "$TRAVIS_OS_NAME" = "linux" ]; then
+    tag=1.1.0
+    batstmp="$(mktemp -d bats-core-"${tag}".XXXXX)"
+    pushd "${batstmp}" &> /dev/null || return 11
+    curl -sSLO https://github.com/bats-core/bats-core/archive/v"${tag}".tar.gz
+    tar -zxvf v"${tag}".tar.gz
+    sudo bash "${batstmp}"/bats-core-"${tag}"/install.sh /usr/local
+    popd &> /dev/null || return 12
+    command -v bats && rm -rf "${batstmp}"
+  fi
 
 jobs:
   include:
