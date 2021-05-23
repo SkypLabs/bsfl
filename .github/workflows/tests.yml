@@ -1,0 +1,38 @@
+name: Tests
+
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  shellcheck:
+    name: Test code with ShellCheck
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@master
+
+  bats:
+    name: Test code with Bats
+    runs-on: ubuntu-20.04
+    container: bats/bats:latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Run Bats
+        run: |
+          bats --version
+          bats -r .
+
+  doxygen:
+    name: Test documentation
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Build Doxygen documentation
+        uses: mattnotmitt/doxygen-action@v1
+        with:
+          working-directory: ./doc
