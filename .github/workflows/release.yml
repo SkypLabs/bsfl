@@ -1,0 +1,27 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - master
+      - main
+  workflow_dispatch:
+
+jobs:
+  doc-github-pages:
+    name: Publish documentation on GitHub Pages
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Build Doxygen documentation
+        uses: mattnotmitt/doxygen-action@v1
+        with:
+          working-directory: ./doc
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./doc/html
