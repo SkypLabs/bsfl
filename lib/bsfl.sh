@@ -1085,9 +1085,13 @@ is_ipv4() {
 ## @retval 0 if the FQDN is valid.
 ## @retval 1 in others cases.
 is_fqdn() {
-    echo "$1" | grep -Pq '(?=^.{4,255}$)(^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\.)+[a-zA-Z]{2,63}\.?$)'
+    # Some grep implementations return other error codes than 1 when no lines
+    # were selected.
+    if echo "$1" | grep -Pq '(?=^.{4,255}$)(^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\.)+[a-zA-Z]{2,63}\.?$)'; then
+        return 0
+    fi
 
-    return $?
+    return 1
 }
 
 ## @fn is_ipv4_netmask()
