@@ -1,8 +1,10 @@
 # BSFL
 
-[![Build Status](https://travis-ci.org/SkypLabs/bsfl.svg?branch=master)](https://travis-ci.org/SkypLabs/bsfl)
+[![Tests](https://github.com/SkypLabs/bsfl/actions/workflows/tests.yml/badge.svg)](https://github.com/SkypLabs/bsfl/actions/workflows/tests.yml)
 
-The Bash Shell Function Library (BSFL) is a small bash script that acts as a library for bash scripts. It provides a couple of functions that makes the lives of most people using shell scripts a bit easier.
+The Bash Shell Function Library (BSFL) is a small bash script that acts as a
+library for bash scripts. It provides a couple of functions that makes the lives
+of most people using shell scripts a bit easier.
 
 This project is a fork of the original work of Louwrentius.
 
@@ -10,7 +12,8 @@ This project is a fork of the original work of Louwrentius.
 
 ## Getting started
 
-In order to use BSFL, you have to include the library in your bash scripts. You can do it with an absolute path:
+In order to use BSFL, you have to include the library in your bash scripts. You
+can do it with an absolute path:
 
     source <absolute path to BSFL>
 
@@ -30,7 +33,8 @@ For example:
 
 ## What's next?
 
-The best way to learn how BSFL works is to look at the examples available in the [examples][examples] folder.
+The best way to learn how BSFL works is to look at the examples available in the
+[examples][examples] folder.
 
 ## Documentation
 
@@ -44,9 +48,11 @@ Building the documentation is done by using [Doxygen][doxygen]:
 
 ## Dependencies
 
-BSFL is implemented for bash version 4. Prior versions of bash will fail at interpreting its code.
+BSFL is implemented for bash version 4. Prior versions of bash will fail at
+interpreting its code.
 
-In addition, BSFL depends of some external programs. Here is the list of these programs:
+In addition, BSFL depends of some external programs. Here is the list of these
+programs:
 
 * date
 * grep
@@ -55,11 +61,13 @@ In addition, BSFL depends of some external programs. Here is the list of these p
 * tput
 * tr
 
-However, we try to get as much as possible a standalone library. Hence, some of these external dependencies will be removed in the future.
+However, we try to get as much as possible a standalone library. Hence, some of
+these external dependencies will be removed in the future.
 
 ## Unit tests
 
-BSFL uses [Bats][bats] testing framework to verify the correct behaviour of its functions.
+BSFL uses [Bats][bats] testing framework to verify the correct behaviour of its
+functions.
 
 To run all the tests:
 
@@ -83,9 +91,9 @@ Below are the different steps to do before releasing a new version:
 * Update the `Version` variable in `bsfl.spec`
 * Update `README.md` if needed
 
-## Get involved!
+## Get involved
 
-This project is still under development. Contributions are welcomed.
+This project is still under development. Contributions are welcomed!
 
 ## License
 
